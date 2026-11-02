@@ -558,5 +558,14 @@
     <script defer src="./src/presentation.js"></script>
     <script defer src="./src/vendor/three.min.js"></script>
     <script defer src="./src/landing3d.js"></script>
+    <script>
+      /* Force top on load so Act 01 is the first thing the user sees */
+      (function () {
+        if (window.scrollY) window.scrollTo(0, 0);
+        if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+        if (document.documentElement) document.documentElement.scrollTop = 0;
+        if (document.body) document.body.scrollTop = 0;
+      })();
+    </script>
   </body>
 </html>

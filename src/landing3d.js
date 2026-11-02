@@ -1316,9 +1316,21 @@
     var d = document.getElementById("l3d-status");
     if (d) {
       d.style.display = "block";
+      d.style.position = "fixed";
+      d.style.top = "10px";
+      d.style.left = "50%";
+      d.style.transform = "translateX(-50%)";
+      d.style.zIndex = "99999";
+      d.style.padding = "10px 16px";
+      d.style.borderRadius = "8px";
+      d.style.background = ok ? "rgba(16,35,51,0.95)" : "rgba(160,30,20,0.95)";
+      d.style.color = "#fff";
+      d.style.border = ok ? "1px solid rgba(240,83,39,0.7)" : "1px solid #f05327";
+      d.style.fontFamily = "system-ui";
+      d.style.fontSize = "13px";
+      d.style.textAlign = "center";
+      d.style.minWidth = "220px";
       d.textContent = msg;
-      d.style.background = ok ? "rgba(16,35,51,0.9)" : "rgba(160,30,20,0.95)";
-      d.style.border = ok ? "1px solid rgba(240,83,39,0.6)" : "1px solid #f05327";
     }
     console.log("[landing3d]", msg);
   }
