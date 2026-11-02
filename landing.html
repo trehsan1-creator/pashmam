@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html data-page="landing" lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#DCE1E8" />
+    <meta
+      name="description"
+      content="تجربه تعاملی سه‌بعدی سامانه مدیریت ناوگان آتی‌فرزام (MyFarzam) — سخت‌افزار GPS، سنسورها، نقشه زنده، ۹ گزارش Excel و توسعه اختصاصی API"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:title" content="آتی‌فرزام | تجربه سه‌بعدی مدیریت هوشمند ناوگان" />
+    <meta
+      property="og:description"
+      content="مرور سریع و سه‌بعدی زنجیره تله‌متری آتی‌فرزام: از کالبدشکافی ردیاب و سنسورها تا شهر هوشمند، داشبورد MyFarzam و اتصال دوطرفه API"
+    />
+    <link rel="icon" type="image/svg+xml" href="./assets/images/af-logo.svg" />
+    <title>آتی‌فرزام | نمای سه‌بعدی سامانه مدیریت ناوگان</title>
+    <link rel="preload" href="./assets/fonts/Peyda-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./assets/fonts/Peyda-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./src/presentation.css" />
+    <link rel="stylesheet" href="./src/pages.css" />
+    <link rel="stylesheet" href="./src/landing3d.css" />
+    <style id="af-motion-styles"></style>
+  </head>
+  <body>
+    <!-- Top Orange Scroll Progress Beam -->
+    <div class="scroll-line" id="scroll-line" aria-hidden="true"></div>
+
+    <!-- Minimalist Orange-Glass Scroll Line + Contour-Trace Traveler -->
+    <aside class="scroll-rail" id="scroll-journey" aria-hidden="true">
+      <div class="scroll-rail-track">
+        <div class="scroll-rail-fill" id="scroll-rail-fill"></div>
+      </div>
+      <div class="scroll-trace-traveler" id="scroll-trace-traveler">
+        <svg viewBox="-900 -900 1800 1800" class="scroll-trace-svg" id="scroll-trace-svg"></svg>
+      </div>
+    </aside>
+
+    <!-- Full-Viewport Fixed WebGL 3D Architectural Telemetry World -->
+    <div class="l3d-stage-wrap" id="l3d-stage-wrap">
+      <canvas class="l3d-canvas" id="l3d-canvas" aria-label="صحنه سه‌بعدی تعاملی سامانه مدیریت ناوگان آتی‌فرزام"></canvas>
+    </div>
+
+    <!-- 3D World-Space Projected Callout Pins -->
+    <div class="l3d-world-labels" id="l3d-world-labels" aria-hidden="true"></div>
+
+    <!-- Minimal Floating Presentation Header -->
+    <header class="top-bar" id="top-bar">
+      <div class="container top-bar-inner">
+        <a href="index.html" class="brand-cluster smooth-lift" aria-label="سامانه مدیریت ناوگان آتی‌فرزام">
+          <img src="./assets/images/af-logo.svg" alt="" class="nav-af-mark" width="30" height="30" />
+          <div class="nav-divider"></div>
+          <img src="./assets/images/typography-fa.svg" alt="آتی‌فرزام" class="nav-fa-type" width="66" height="22" />
+          <img src="./assets/images/typography-en.svg" alt="AtiFarzam" class="nav-en-type" width="96" height="20" />
+        </a>
+
+        <nav class="top-nav" aria-label="صفحه‌های سایت">
+          <button
+            type="button"
+            class="nav-hamburger"
+            id="nav-hamburger"
+            aria-label="منوی ناوبری"
+            aria-expanded="false"
+            aria-controls="nav-mobile-menu"
+          >
+            <span></span><span></span><span></span>
+          </button>
+          <div class="nav-mobile-overlay" id="nav-mobile-overlay"></div>
+          <div class="nav-mobile-menu" id="nav-mobile-menu">
+            <div class="nav-item">
+              <a href="landing.html" class="smooth-lift is-current" data-i18n="l3d.nav3d">نمای 3D</a>
+            </div>
+            <div class="nav-item">
+              <a href="index.html" class="smooth-lift" data-i18n="nav.home">خانه</a>
+            </div>
+            <div class="nav-item">
+              <a href="hardware.html" class="smooth-lift" data-i18n="nav.hardware">سخت‌افزار</a>
+            </div>
+            <div class="nav-item" data-dropdown="software">
+              <a href="software.html" class="smooth-lift">
+                <span data-i18n="nav.software">نرم‌افزار</span>
+                <span class="nav-dropdown-toggle" role="button" aria-label="زیرمنو"></span>
+              </a>
+              <div class="nav-dropdown">
+                <a href="software.html#ch-telemetry" class="smooth-lift" data-i18n="nav.sw.telemetry">پایش زنده</a>
+                <a href="software.html#ch-dashboard" class="smooth-lift" data-i18n="nav.sw.dashboard">داشبورد</a>
+                <a href="software.html#ch-map" class="smooth-lift" data-i18n="nav.sw.map">نقشهٔ دستگاه‌ها</a>
+                <a href="software.html#ch-devices" class="smooth-lift" data-i18n="nav.sw.devices">مدیریت دستگاه‌ها</a>
+                <a href="software.html#ch-geofences" class="smooth-lift" data-i18n="nav.sw.geofences">محدوده‌ها</a>
+                <a href="software.html#ch-notifications" class="smooth-lift" data-i18n="nav.sw.notifications">اعلان‌ها</a>
+                <a href="software.html#ch-reports" class="smooth-lift" data-i18n="nav.sw.reports">گزارش‌ها</a>
+                <a href="software.html#ch-custom-dev" class="smooth-lift" data-i18n="nav.sw.custom">توسعه اختصاصی</a>
+              </div>
+            </div>
+            <div class="nav-item">
+              <a href="company.html" class="smooth-lift" data-i18n="nav.company">شرکت</a>
+            </div>
+            <div class="nav-item">
+              <a href="contact.html" class="smooth-lift" data-i18n="nav.contact">تماس</a>
+            </div>
+            <div class="nav-item">
+              <a href="contact.html" class="nav-cta smooth-lift" data-i18n="nav.cta">درخواست دمو</a>
+            </div>
+          </div>
+
+          <div class="nav-desktop">
+            <div class="nav-item">
+              <a href="landing.html" class="smooth-lift is-current" data-i18n="l3d.nav3d">نمای 3D</a>
+            </div>
+            <div class="nav-item">
+              <a href="index.html" class="smooth-lift" data-i18n="nav.home">خانه</a>
+            </div>
+            <div class="nav-item">
+              <a href="hardware.html" class="smooth-lift" data-i18n="nav.hardware">سخت‌افزار</a>
+            </div>
+            <div class="nav-item" data-dropdown="software">
+              <a href="software.html" class="smooth-lift">
+                <span data-i18n="nav.software">نرم‌افزار</span>
+                <span class="nav-dropdown-toggle" role="button" aria-label="زیرمنو"></span>
+              </a>
+              <div class="nav-dropdown">
+                <a href="software.html#ch-telemetry" class="smooth-lift" data-i18n="nav.sw.telemetry">پایش زنده</a>
+                <a href="software.html#ch-dashboard" class="smooth-lift" data-i18n="nav.sw.dashboard">داشبورد</a>
+                <a href="software.html#ch-map" class="smooth-lift" data-i18n="nav.sw.map">نقشهٔ دستگاه‌ها</a>
+                <a href="software.html#ch-devices" class="smooth-lift" data-i18n="nav.sw.devices">مدیریت دستگاه‌ها</a>
+                <a href="software.html#ch-geofences" class="smooth-lift" data-i18n="nav.sw.geofences">محدوده‌ها</a>
+                <a href="software.html#ch-notifications" class="smooth-lift" data-i18n="nav.sw.notifications">اعلان‌ها</a>
+                <a href="software.html#ch-reports" class="smooth-lift" data-i18n="nav.sw.reports">گزارش‌ها</a>
+                <a href="software.html#ch-custom-dev" class="smooth-lift" data-i18n="nav.sw.custom">توسعه اختصاصی</a>
+              </div>
+            </div>
+            <div class="nav-item">
+              <a href="company.html" class="smooth-lift" data-i18n="nav.company">شرکت</a>
+            </div>
+            <div class="nav-item">
+              <a href="contact.html" class="smooth-lift" data-i18n="nav.contact">تماس</a>
+            </div>
+            <div class="nav-item">
+              <a href="contact.html" class="nav-cta smooth-lift" data-i18n="nav.cta">درخواست دمو</a>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Top-Left Sliding Language Drawer Switcher (FA / EN / AR) -->
+        <div class="lang-switcher" id="lang-switcher" style="--lang-idx: 0">
+          <button
+            type="button"
+            class="lang-trigger"
+            id="lang-trigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="lang-drawer-tray"
+            aria-label="تغییر زبان سایت — Change Language"
+          >
+            <span class="lang-trigger-label" id="lang-current-name">فارسی</span>
+            <span class="lang-trigger-code" id="lang-current-code" dir="ltr">FA</span>
+            <svg viewBox="0 0 16 16" class="lang-chevron-svg" aria-hidden="true" fill="none">
+              <path d="M4.2 6.2L8 10L11.8 6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <div class="lang-drawer-tray" id="lang-drawer-tray" role="listbox" aria-label="انتخاب زبان">
+            <div class="lang-drawer-inner">
+              <div class="lang-drawer-head" aria-hidden="true">
+                <span class="lang-drawer-grip"></span>
+                <span class="lang-drawer-caption" data-i18n="lang.caption">انتخاب زبان نمایش</span>
+              </div>
+
+              <div class="lang-options-track">
+                <div class="lang-active-glider" aria-hidden="true"></div>
+
+                <button type="button" class="lang-opt-btn is-active" role="option" aria-selected="true" data-lang="fa" data-idx="0">
+                  <span class="lang-opt-crest" aria-hidden="true"><span class="crest-glyph">ف</span></span>
+                  <span class="lang-opt-copy">
+                    <strong>فارسی</strong>
+                    <small dir="ltr">FA · Persian</small>
+                  </span>
+                  <span class="lang-opt-dot" aria-hidden="true"></span>
+                </button>
+
+                <button type="button" class="lang-opt-btn" role="option" aria-selected="false" data-lang="en" data-idx="1">
+                  <span class="lang-opt-crest" aria-hidden="true"><span class="crest-glyph" dir="ltr">EN</span></span>
+                  <span class="lang-opt-copy">
+                    <strong dir="ltr">English</strong>
+                    <small>انگلیسی · International</small>
+                  </span>
+                  <span class="lang-opt-dot" aria-hidden="true"></span>
+                </button>
+
+                <button type="button" class="lang-opt-btn" role="option" aria-selected="false" data-lang="ar" data-idx="2">
+                  <span class="lang-opt-crest" aria-hidden="true"><span class="crest-glyph">ع</span></span>
+                  <span class="lang-opt-copy">
+                    <strong>العربية</strong>
+                    <small dir="ltr">AR · عربی</small>
+                  </span>
+                  <span class="lang-opt-dot" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- =====================================================================
+         6 COMPACT 3D SCROLL ACTS (TOTAL ~600vh — CONCISE, FLUID, COMPLETE)
+         ===================================================================== -->
+    <main class="l3d-main" id="l3d-main">
+      <!-- ACT 01: Brand Monolith, GNSS Constellation & 3 Solution Pillars -->
+      <section class="l3d-act l3d-act--start is-active" id="act-01" data-act="0">
+        <div class="l3d-act-inner">
+          <article class="l3d-card silk-card">
+            <div class="l3d-eyebrow">
+              <span class="tag-beacon"></span>
+              <span class="l3d-step-num" dir="ltr">01 / 06</span>
+              <span data-i18n="l3d.a1.tag">اکوسیستم یکپارچه تله‌متری سه‌بعدی</span>
+            </div>
+
+            <h1>
+              <span data-i18n="l3d.a1.title">ردیابی هوشمند و مدیریت ناوگان</span>
+              <span class="accent-text" data-i18n="l3d.a1.accent">آتی‌فرزام</span>
+            </h1>
+
+            <p class="l3d-lead" data-i18n="l3d.a1.desc">
+              زنجیرهٔ کامل مدیریت ناوگان سازمانی و خودروهای شخصی در یک نگاه سه‌بعدی؛ از تأمین ردیاب‌های صنعتی و سنسورهای تخصصی تا پلتفرم بومی MyFarzam، گزارش‌های ۹گانه Excel و اتصال دوطرفه API.
+            </p>
+
+            <div class="l3d-pillars-strip" role="group" aria-label="سه ضلع راهکار آتی‌فرزام">
+              <a href="#act-02" class="l3d-pillar-btn" data-pillar="0">
+                <small>01 · HARDWARE</small>
+                <strong data-i18n="l3d.a1.p1">ردیاب و سنسورها</strong>
+              </a>
+              <a href="#act-03" class="l3d-pillar-btn" data-pillar="1">
+                <small>02 · MYFARZAM</small>
+                <strong data-i18n="l3d.a1.p2">پایش و ۹ گزارش</strong>
+              </a>
+              <a href="#act-05" class="l3d-pillar-btn" data-pillar="2">
+                <small>03 · R&amp;D &amp; API</small>
+                <strong data-i18n="l3d.a1.p3">توسعه اختصاصی</strong>
+              </a>
+            </div>
+
+            <div class="l3d-metrics-row">
+              <div class="l3d-metric-cell">
+                <strong dir="ltr"><em>9</em> XLSX</strong>
+                <span data-i18n="l3d.a1.m1">گزارش تحلیلی آماده حسابرسی</span>
+              </div>
+              <div class="l3d-metric-cell">
+                <strong dir="ltr">&lt; <em>2m</em></strong>
+                <span data-i18n="l3d.a1.m2">دقت ماهواره‌ای GPS/GLONASS</span>
+              </div>
+              <div class="l3d-metric-cell">
+                <strong dir="ltr">24/<em>7</em></strong>
+                <span data-i18n="l3d.a1.m3">۳ دسته اعلان هوشمند</span>
+              </div>
+            </div>
+
+            <div class="l3d-actions">
+              <a href="contact.html" class="l3d-btn-primary" data-i18n="l3d.a1.cta">درخواست دمو و قیمت</a>
+              <a href="#act-02" class="l3d-btn-ghost" data-i18n="l3d.a1.scroll">اسکرول کنید · کالبدشکافی ↓</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ACT 02: 3D Exploded 4-Layer Industrial GPS Hardware & Sensor Matrix -->
+      <section class="l3d-act l3d-act--end" id="act-02" data-act="1">
+        <div class="l3d-act-inner">
+          <article class="l3d-card silk-card">
+            <div class="l3d-eyebrow">
+              <span class="tag-beacon"></span>
+              <span class="l3d-step-num" dir="ltr">02 / 06</span>
+              <span data-i18n="l3d.a2.tag">سخت‌افزار صنعتی و ماتریس سنسورها</span>
+            </div>
+
+            <h2 data-i18n="l3d.a2.title">معماری ۴ لایه ردیاب؛ انتخاب بر اساس خروجی در MyFarzam</h2>
+
+            <p class="l3d-lead" data-i18n="l3d.a2.desc">
+              روی هر لایه کلیک کنید تا قطعه متناظر در مدل سه‌بعدی برجسته شود و نقش آن در تولید داده‌ها و گزارش‌های MyFarzam را ببینید.
+            </p>
+
+            <div class="l3d-chip-row" id="l3d-hw-chips" role="tablist" aria-label="لایه‌های سخت‌افزار">
+              <button type="button" class="l3d-chip is-on" data-hw="0" role="tab" aria-selected="true">
+                <span class="l3d-chip-num" dir="ltr">01</span><span data-i18n="l3d.a2.c0">آنتن GNSS</span>
+              </button>
+              <button type="button" class="l3d-chip" data-hw="1" role="tab" aria-selected="false">
+                <span class="l3d-chip-num" dir="ltr">02</span><span data-i18n="l3d.a2.c1">SIM و حافظه آفلاین</span>
+              </button>
+              <button type="button" class="l3d-chip" data-hw="2" role="tab" aria-selected="false">
+                <span class="l3d-chip-num" dir="ltr">03</span><span data-i18n="l3d.a2.c2">باتری پشتیبان</span>
+              </button>
+              <button type="button" class="l3d-chip" data-hw="3" role="tab" aria-selected="false">
+                <span class="l3d-chip-num" dir="ltr">04</span><span data-i18n="l3d.a2.c3">درگاه ACC / دما / سوخت</span>
+              </button>
+            </div>
+
+            <div class="l3d-detail-box" id="l3d-hw-detail">
+              <div class="l3d-detail-head">
+                <strong id="l3d-hw-dtitle">گیرنده چندمنظومه‌ای GPS / GLONASS</strong>
+                <span class="l3d-detail-badge" id="l3d-hw-dbadge">همه کلاس‌ها</span>
+              </div>
+              <p id="l3d-hw-ddesc">
+                ثبت دقیق مختصات و سرعت در معابر شهری و جاده‌ای؛ تغذیه‌کننده نقشه زنده، گزارش پیمایش، سفر، توقف، محدوده و نقشه حرارتی.
+              </p>
+              <div class="l3d-tag-cloud">
+                <span class="l3d-micro-tag" data-i18n="l3d.a2.k1">کلاس سازمانی ACC</span>
+                <span class="l3d-micro-tag" data-i18n="l3d.a2.k2">کلاس زنجیره سرد و سوخت</span>
+                <span class="l3d-micro-tag" data-i18n="l3d.a2.k3">کلاس خودروی شخصی</span>
+                <span class="l3d-micro-tag" dir="ltr">IP65 · 9–36V DC</span>
+              </div>
+            </div>
+
+            <div class="l3d-actions">
+              <a href="hardware.html" class="l3d-link-deep" data-i18n="l3d.a2.link">کاتالوگ ردیاب‌ها و جدول تناظر فنی ←</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ACT 03: 3D Fleet City, Live Map, Geofences, Groups & 4 Industries -->
+      <section class="l3d-act l3d-act--start" id="act-03" data-act="2">
+        <div class="l3d-act-inner">
+          <article class="l3d-card silk-card">
+            <div class="l3d-eyebrow">
+              <span class="tag-beacon"></span>
+              <span class="l3d-step-num" dir="ltr">03 / 06</span>
+              <span data-i18n="l3d.a3.tag">نقشه زنده، محدوده مجاز (Geofence) و صنایع</span>
+            </div>
+
+            <h2 data-i18n="l3d.a3.title">پایش فضایی ناوگان در ۴ سناریوی واقعی</h2>
+
+            <p class="l3d-lead" data-i18n="l3d.a3.desc">
+              هر واحد را انتخاب کنید تا خودروی متناظر در شهر سه‌بعدی ردیابی شود؛ شامل مدیریت گروه‌ها، حصار جغرافیایی با سقف سرعت و اشتراک سازمانی یا شخصی.
+            </p>
+
+            <div class="l3d-chip-row" id="l3d-unit-chips" role="tablist" aria-label="واحدها و صنایع هدف">
+              <button type="button" class="l3d-chip is-on" data-unit3d="0" role="tab" aria-selected="true">
+                <span class="l3d-chip-num">۱۰۴</span><span data-i18n="l3d.a3.u0">پخش مویرگی</span>
+              </button>
+              <button type="button" class="l3d-chip" data-unit3d="1" role="tab" aria-selected="false">
+                <span class="l3d-chip-num">۲۰۸</span><span data-i18n="l3d.a3.u1">زنجیره سرد</span>
+              </button>
+              <button type="button" class="l3d-chip" data-unit3d="2" role="tab" aria-selected="false">
+                <span class="l3d-chip-num">۳۱۲</span><span data-i18n="l3d.a3.u2">ترانزیت سنگین</span>
+              </button>
+              <button type="button" class="l3d-chip" data-unit3d="3" role="tab" aria-selected="false">
+                <span class="l3d-chip-num">۴۰۱</span><span data-i18n="l3d.a3.u3">خودروی شخصی</span>
+              </button>
+            </div>
+
+            <div class="l3d-detail-box">
+              <div class="l3d-detail-head">
+                <strong id="l3d-u-title">واحد ۱۰۴ · ناوگان توزیع و پخش</strong>
+                <span class="l3d-detail-badge" id="l3d-u-tier">اشتراک سازمانی</span>
+              </div>
+              <div class="l3d-tel-grid">
+                <div class="l3d-tel-cell">
+                  <span data-i18n="l3d.a3.lblSpeed">سرعت و وضعیت</span>
+                  <strong id="l3d-u-speed">۶۴ km/h · در حرکت</strong>
+                </div>
+                <div class="l3d-tel-cell">
+                  <span data-i18n="l3d.a3.lblZone">محدوده و گروه</span>
+                  <strong id="l3d-u-zone">داخل Geofence شعبه (۶۰ km/h)</strong>
+                </div>
+                <div class="l3d-tel-cell">
+                  <span data-i18n="l3d.a3.lblSensor">تله‌متری فعال</span>
+                  <strong id="l3d-u-sensor">GNSS + سوئیچ ACC + توقف</strong>
+                </div>
+                <div class="l3d-tel-cell">
+                  <span data-i18n="l3d.a3.lblReport">گزارش کلیدی</span>
+                  <strong id="l3d-u-report">عملکرد گروهی و محدوده</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="l3d-actions">
+              <a href="software.html#ch-telemetry" class="l3d-link-deep" data-i18n="l3d.a3.link">شبیه‌ساز زنده، گروه‌ها و محدوده‌ها ←</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ACT 04: 3D Command Deck, KPIs, 3 Alerts, 9 Excel Reports & 6 Benefits -->
+      <section class="l3d-act l3d-act--end" id="act-04" data-act="3">
+        <div class="l3d-act-inner">
+          <article class="l3d-card silk-card">
+            <div class="l3d-eyebrow">
+              <span class="tag-beacon"></span>
+              <span class="l3d-step-num" dir="ltr">04 / 06</span>
+              <span data-i18n="l3d.a4.tag">داشبورد MyFarzam · اعلان‌ها · ۹ گزارش Excel</span>
+            </div>
+
+            <h2 data-i18n="l3d.a4.title">از KPIهای لحظه‌ای تا ۹ گزارش آماده حسابرسی</h2>
+
+            <p class="l3d-lead" data-i18n="l3d.a4.desc">
+              دسترسی از طریق وب، موبایل و API؛ همراه با ۳ دسته اعلان (هشدار، نگهداری، سیستم) و ماتریس سه‌بعدی ۹ گزارش با خروجی مستقیم Excel:
+            </p>
+
+            <div class="l3d-reports-matrix" id="l3d-rep-matrix" role="tablist" aria-label="۹ گزارش تحلیلی MyFarzam">
+              <button type="button" class="l3d-rep-btn is-on" data-rep="0" role="tab" aria-selected="true"><i>۰۱</i><span data-i18n="l3d.r0">پیمایش</span></button>
+              <button type="button" class="l3d-rep-btn" data-rep="1" role="tab" aria-selected="false"><i>۰۲</i><span data-i18n="l3d.r1">رویداد</span></button>
+              <button type="button" class="l3d-rep-btn" data-rep="2" role="tab" aria-selected="false"><i>۰۳</i><span data-i18n="l3d.r2">روزانه</span></button>
+              <button type="button" class="l3d-rep-btn" data-rep="3" role="tab" aria-selected="false"><i>۰۴</i><span data-i18n="l3d.r3">عملکرد</span></button>
+              <button type="button" class="l3d-rep-btn" data-rep="4" role="tab" aria-selected="false"><i>۰۵</i><span data-i18n="l3d.r4">توقف</span></button>
+              <button type="button" class="l3d-rep-btn" data-rep="5" role="tab" aria-selected="false"><i>۰۶</i><span data-i18n="l3d.r5">سفر</span></button>
+              <button type="button" class="l3d-rep-btn" data-rep="6" role="tab" aria-selected="false"><i>۰۷</i><span data-i18n="l3d.r6">محدوده</span></button>
+              <button type="button" class="l3d-rep-btn" data-rep="7" role="tab" aria-selected="false"><i>۰۸</i><span data-i18n="l3d.r7">حرارتی</span></button>
+              <button type="button" class="l3d-rep-btn" data-rep="8" role="tab" aria-selected="false"><i>۰۹</i><span data-i18n="l3d.r8">دما</span></button>
+            </div>
+
+            <div class="l3d-detail-box">
+              <div class="l3d-detail-head">
+                <strong id="l3d-rep-title">۰۱ · گزارش پیمایش (Route)</strong>
+                <span class="l3d-detail-badge" dir="ltr">EXCEL .XLSX</span>
+              </div>
+              <p id="l3d-rep-desc">
+                بازسازی دقیق مسیر خودرو با فیلتر حذف سرعت صفر، پاکسازی اختلال و پرش GPS و نمایش ولتاژ نقطه.
+              </p>
+              <div class="l3d-tag-cloud">
+                <span class="l3d-micro-tag" data-i18n="l3d.ben1">امنیت ۲۴/۷</span>
+                <span class="l3d-micro-tag" data-i18n="l3d.ben2">کاهش سوخت</span>
+                <span class="l3d-micro-tag" data-i18n="l3d.ben3">بهینه‌سازی مسیر</span>
+                <span class="l3d-micro-tag" data-i18n="l3d.ben4">تخمین دقیق ETA</span>
+              </div>
+            </div>
+
+            <div class="l3d-actions">
+              <a href="software.html#ch-reports" class="l3d-link-deep" data-i18n="l3d.a4.link">بررسی کامل داشبورد، ۹ گزارش و مزایا ←</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ACT 05: In-House Codebase, Bidirectional ERP/API Bridge & 4-Step Rollout -->
+      <section class="l3d-act l3d-act--start" id="act-05" data-act="4">
+        <div class="l3d-act-inner">
+          <article class="l3d-card silk-card">
+            <div class="l3d-eyebrow">
+              <span class="tag-beacon"></span>
+              <span class="l3d-step-num" dir="ltr">05 / 06</span>
+              <span data-i18n="l3d.a5.tag">توسعه بومی، وب‌سرویس API و استقرار سازمانی</span>
+            </div>
+
+            <h2 data-i18n="l3d.a5.title">مالکیت کامل کد منبع؛ یکپارچه با ERP سازمان شما</h2>
+
+            <p class="l3d-lead" data-i18n="l3d.a5.desc">
+              برخلاف پنل‌های ترجمه‌شده، هسته MyFarzam بومی است؛ پروتکل ردیاب‌های قبلی شما را پوشش می‌دهد و طی ۴ گام استاندارد در سازمان مستقر می‌شود:
+            </p>
+
+            <div class="l3d-chip-row" id="l3d-bridge-tabs" role="tablist">
+              <button type="button" class="l3d-chip is-on" data-bmode="api" role="tab" aria-selected="true" data-i18n="l3d.a5.tabApi">
+                توسعه اختصاصی و API دوطرفه
+              </button>
+              <button type="button" class="l3d-chip" data-bmode="steps" role="tab" aria-selected="false" data-i18n="l3d.a5.tabSteps">
+                نقشه راه ۴ گام استقرار
+              </button>
+            </div>
+
+            <ul class="l3d-step-list" id="l3d-bridge-list">
+              <li class="is-on" data-bnode="0">
+                <b><em dir="ltr">01</em> <span data-i18n="l3d.a5.n0t">اتصال دوطرفه به ERP</span></b>
+                <span data-i18n="l3d.a5.n0d">تبادل خودکار پیمایش، حضور در محدوده و سوخت با سیستم مالی و حواله بار</span>
+              </li>
+              <li data-bnode="1">
+                <b><em dir="ltr">02</em> <span data-i18n="l3d.a5.n1t">گزارش و قوانین سفارشی</span></b>
+                <span data-i18n="l3d.a5.n1d">طراحی فرمول‌های خاص شیفت، پیمانکاری و خروجی اکسل منطبق با حسابرسی</span>
+              </li>
+              <li data-bnode="2">
+                <b><em dir="ltr">03</em> <span data-i18n="l3d.a5.n2t">پروتکل ردیاب‌های موجود</span></b>
+                <span data-i18n="l3d.a5.n2d">یکپارچه‌سازی سخت‌افزارهای قبلی ناوگان شما در هسته مرکزی MyFarzam</span>
+              </li>
+              <li data-bnode="3">
+                <b><em dir="ltr">04</em> <span data-i18n="l3d.a5.n3t">استقرار و پشتیبانی بومی</span></b>
+                <span data-i18n="l3d.a5.n3d">تقویم شمسی، RTL استاندارد، سطوح دسترسی و رصد سلامت اتصال سیم‌کارت‌ها</span>
+              </li>
+            </ul>
+
+            <div class="l3d-actions">
+              <a href="software.html#ch-custom-dev" class="l3d-link-deep" data-i18n="l3d.a5.link1">توسعه اختصاصی و API ←</a>
+              <a href="company.html" class="l3d-btn-ghost" data-i18n="l3d.a5.link2">درباره آتی‌فرزام</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ACT 06: Sculptural Diagonal-Orbit Finale & Direct Service Launchpad -->
+      <section class="l3d-act l3d-act--center l3d-act--finale" id="act-06" data-act="5">
+        <div class="l3d-act-inner">
+          <article class="l3d-card l3d-card--finale silk-card">
+            <div class="l3d-eyebrow">
+              <span class="tag-beacon"></span>
+              <span class="l3d-step-num" dir="ltr">06 / 06</span>
+              <span data-i18n="l3d.a6.tag">شروع همکاری · دموی زنده و پیش‌فاکتور</span>
+            </div>
+
+            <h2 data-i18n="l3d.a6.title">دقت در هر نقطه، آرامش در مدیریت مسیر</h2>
+
+            <p class="l3d-lead" data-i18n="l3d.a6.desc">
+              مسیر موردنیاز خود را انتخاب کنید تا فرم هماهنگی دموی آنلاین MyFarzam و استعلام قیمت دقیقاً متناسب با ناوگان شما باز شود:
+            </p>
+
+            <div class="l3d-service-grid">
+              <a href="contact.html?service=hw-sw" class="l3d-service-pill">
+                <i></i><span data-i18n="l3d.a6.s1">سخت‌افزار + نرم‌افزار سازمانی</span>
+              </a>
+              <a href="contact.html?service=sw" class="l3d-service-pill">
+                <i></i><span data-i18n="l3d.a6.s2">فقط نرم‌افزار MyFarzam</span>
+              </a>
+              <a href="contact.html?service=custom" class="l3d-service-pill">
+                <i></i><span data-i18n="l3d.a6.s3">توسعه اختصاصی و API</span>
+              </a>
+              <a href="contact.html?service=personal" class="l3d-service-pill">
+                <i></i><span data-i18n="l3d.a6.s4">ردیاب خودروی شخصی</span>
+              </a>
+            </div>
+
+            <div class="l3d-actions">
+              <a href="contact.html" class="l3d-btn-primary" data-i18n="l3d.a6.cta">هماهنگی دموی آنلاین و پیش‌فاکتور</a>
+              <a href="index.html" class="l3d-btn-ghost" data-i18n="l3d.a6.home">نمای کلاسیک سایت</a>
+              <a href="#act-01" class="l3d-btn-ghost" data-i18n="l3d.a6.top">ابتدای مسیر ↑</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Floating Bottom 6-Stage 3D Chapter Dock -->
+    <nav class="l3d-dock" id="l3d-dock" aria-label="فصل‌های مسیر سه‌بعدی">
+      <div class="l3d-dock-nav">
+        <button type="button" class="l3d-dock-btn is-active" data-goto="0">
+          <b>01</b><span data-i18n="l3d.dock.0">معرفی</span>
+        </button>
+        <button type="button" class="l3d-dock-btn" data-goto="1">
+          <b>02</b><span data-i18n="l3d.dock.1">سخت‌افزار</span>
+        </button>
+        <button type="button" class="l3d-dock-btn" data-goto="2">
+          <b>03</b><span data-i18n="l3d.dock.2">نقشه و صنایع</span>
+        </button>
+        <button type="button" class="l3d-dock-btn" data-goto="3">
+          <b>04</b><span data-i18n="l3d.dock.3">۹ گزارش</span>
+        </button>
+        <button type="button" class="l3d-dock-btn" data-goto="4">
+          <b>05</b><span data-i18n="l3d.dock.4">API و استقرار</span>
+        </button>
+        <button type="button" class="l3d-dock-btn" data-goto="5">
+          <b>06</b><span data-i18n="l3d.dock.5">دمو</span>
+        </button>
+      </div>
+      <div class="l3d-dock-sep" aria-hidden="true"></div>
+      <div class="l3d-cam-readout" id="l3d-cam-readout" aria-hidden="true">Z 000m · 01/06</div>
+    </nav>
+
+    <script defer src="./src/motions.js"></script>
+    <script defer src="./src/presentation.js"></script>
+    <script defer src="./src/vendor/three.min.js"></script>
+    <script defer src="./src/landing3d.js"></script>
+  </body>
+</html>
