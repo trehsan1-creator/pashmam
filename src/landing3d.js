@@ -1312,29 +1312,52 @@
   /* ------------------------------------------------------------------ */
   /*  INIT */
   /* ------------------------------------------------------------------ */
+  function setDebug(msg, ok) {
+    var d = document.getElementById("l3d-status");
+    if (d) {
+      d.style.display = "block";
+      d.textContent = msg;
+      d.style.background = ok ? "rgba(16,35,51,0.9)" : "rgba(160,30,20,0.95)";
+      d.style.border = ok ? "1px solid rgba(240,83,39,0.6)" : "1px solid #f05327";
+    }
+    console.log("[landing3d]", msg);
+  }
+
   function init() {
     // Apply saved language (presentation.js already did this; ensure dir/lang reflect)
     var savedLang = getLang();
     document.documentElement.lang = savedLang;
     document.documentElement.dir = (savedLang === "fa" || savedLang === "ar") ? "rtl" : "ltr";
 
-    if (webglAvailable() && THREE) {
-      try {
-        initThree();
-        setupInteractions();
-        setupLangObserver();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onResize, { passive: true });
-        // initial frame
-        targetScrollProg = Math.max(0, Math.min(1, getScrollTop() / getMaxScroll()));
-        smoothScrollProg = targetScrollProg;
-        updateCameraFromScroll();
-        animate();
-      } catch (e) {
-        console.warn("[landing3d] WebGL init failed, falling back:", e);
-        setupFallback();
-      }
-    } else {
+    setDebug("landing3d: init…", true);
+
+    if (!webglAvailable()) {
+      setDebug("WebGL غیرفعال است — نسخه دو بعدی بارگذاری می‌شود", false);
+      setupFallback();
+      return;
+    }
+    if (!THREE) {
+      setDebug("Three.js بارگذاری نشد — vendor/three.min.js را بررسی کنید", false);
+      setupFallback();
+      return;
+    }
+    setDebug("Three.js r" + THREE.REVISION + " بارگذاری شد", true);
+
+    try {
+      initThree();
+      setupInteractions();
+      setupLangObserver();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onResize, { passive: true });
+      // initial frame
+      targetScrollProg = Math.max(0, Math.min(1, getScrollTop() / getMaxScroll()));
+      smoothScrollProg = targetScrollProg;
+      updateCameraFromScroll();
+      animate();
+      setDebug("صحنه سه‌بعدی آماده است · ۶ منطقه", true);
+    } catch (e) {
+      console.warn("[landing3d] WebGL init failed, falling back:", e);
+      setDebug("خطای WebGL: نسخه دو بعدی بارگذاری می‌شود", false);
       setupFallback();
     }
   }
