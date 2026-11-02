@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html data-page="hardware" lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#8A95A0" />
+    <meta name="description" content="ارائه تعاملی سامانه مدیریت ناوگان آتی فرزام — موقعیت‌یابی لحظه‌ای خودرو، پایش مسیرهای حرکتی و فواید ردیاب هوشمند GPS" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:title" content="مدیریت ناوگان آتی فرزام | GPS و ردیاب هوشمند خودرو" />
+    <meta property="og:description" content="پایش لحظه‌ای مسیر، شبیه‌ساز زنده تله‌متری و فواید عملیاتی سامانه ردیاب خودرو آتی فرزام" />
+    <link rel="icon" type="image/svg+xml" href="./assets/images/af-logo.svg" />
+    <title>سخت‌افزار ردیاب | آتی‌فرزام</title>
+    <link rel="preload" href="./assets/fonts/Peyda-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./assets/fonts/Peyda-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./src/presentation.css" />
+<link rel="stylesheet" href="./src/pages.css" />
+    <style id="af-motion-styles"></style>
+  </head>
+  <body>
+    <!-- Page Top Gradient -->
+    <div class="page-top-gradient" aria-hidden="true"></div>
+    
+    <!-- Kinetic Interactive Micro-Dot Field + Architectural Background Rings -->
+    <div class="bg-kinetic-stage" aria-hidden="true">
+      <canvas class="bg-dots-canvas" id="bg-dots-canvas"></canvas>
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" class="bg-kinetic-svg">
+        <g id="bg-wheel-left" transform="translate(190, 210)">
+          <circle cx="0" cy="0" r="310" fill="none" stroke="#102333" stroke-opacity="0.045" stroke-width="1.2" stroke-dasharray="10 14" />
+          <circle cx="0" cy="0" r="230" fill="none" stroke="#f05327" stroke-opacity="0.065" stroke-width="1.3" stroke-dasharray="48 28" />
+        </g>
+        <g id="bg-wheel-right" transform="translate(1260, 700)">
+          <circle cx="0" cy="0" r="360" fill="none" stroke="#102333" stroke-opacity="0.04" stroke-width="1.3" stroke-dasharray="22 16" />
+          <circle cx="0" cy="0" r="260" fill="none" stroke="#f05327" stroke-opacity="0.06" stroke-width="1.6" stroke-dasharray="80 40" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Top Orange Scroll Progress Beam -->
+    <div class="scroll-line" id="scroll-line" aria-hidden="true"></div>
+
+    <!-- ===================================================================
+         MINIMALIST ORANGE-GLASS SCROLL LINE + BORDERLESS FROSTED TRAVELER
+         =================================================================== -->
+    <aside class="scroll-rail" id="scroll-journey" aria-hidden="true">
+      <div class="scroll-rail-track">
+        <!-- Translucent Orange Glass Progress Fill -->
+        <div class="scroll-rail-fill" id="scroll-rail-fill"></div>
+      </div>
+
+      <!-- Contour-Trace (ترسیم خطی) Emblem inside 30% Borderless Frosted-Glass Circle -->
+      <div class="scroll-trace-traveler" id="scroll-trace-traveler">
+        <svg viewBox="-900 -900 1800 1800" class="scroll-trace-svg" id="scroll-trace-svg"></svg>
+      </div>
+    </aside>
+
+    <!-- Minimal Floating Presentation Header -->
+    <header class="top-bar" id="top-bar">
+      <div class="container top-bar-inner">
+        <a href="index.html" class="brand-cluster smooth-lift" aria-label="سامانه مدیریت ناوگان آتی‌فرزام">
+          <img src="./assets/images/af-logo.svg" alt="" class="nav-af-mark" width="30" height="30" />
+          <div class="nav-divider"></div>
+          <img src="./assets/images/typography-fa.svg" alt="آتی‌فرزام" class="nav-fa-type" width="66" height="22" />
+          <img src="./assets/images/typography-en.svg" alt="AtiFarzam" class="nav-en-type" width="96" height="20" />
+        </a>
+
+        <nav class="top-nav" aria-label="صفحه‌های سایت"><button type="button" class="nav-hamburger" id="nav-hamburger" aria-label="منوی ناوبری" aria-expanded="false" aria-controls="nav-mobile-menu"><span></span><span></span><span></span></button><div class="nav-mobile-overlay" id="nav-mobile-overlay"></div><div class="nav-mobile-menu" id="nav-mobile-menu"><div class="nav-item"><a href="index.html" class="smooth-lift" data-i18n="nav.home">خانه</a></div><div class="nav-item"><a href="hardware.html" class="smooth-lift is-current" data-i18n="nav.hardware">سخت‌افزار</a></div><div class="nav-item" data-dropdown="software"><a href="software.html" class="smooth-lift"><span data-i18n="nav.software">نرم‌افزار</span> <span class="nav-dropdown-toggle" role="button" aria-label="زیرمنو"></span></a><div class="nav-dropdown"><a href="software.html#ch-telemetry" class="smooth-lift" data-i18n="nav.sw.telemetry">پایش زنده</a><a href="software.html#ch-dashboard" class="smooth-lift" data-i18n="nav.sw.dashboard">داشبورد</a><a href="software.html#ch-map" class="smooth-lift" data-i18n="nav.sw.map">نقشهٔ دستگاه‌ها</a><a href="software.html#ch-devices" class="smooth-lift" data-i18n="nav.sw.devices">مدیریت دستگاه‌ها</a><a href="software.html#ch-geofences" class="smooth-lift" data-i18n="nav.sw.geofences">محدوده‌ها</a><a href="software.html#ch-notifications" class="smooth-lift" data-i18n="nav.sw.notifications">اعلان‌ها</a><a href="software.html#ch-reports" class="smooth-lift" data-i18n="nav.sw.reports">گزارش‌ها</a><a href="software.html#ch-custom-dev" class="smooth-lift" data-i18n="nav.sw.custom">توسعه اختصاصی</a></div></div><div class="nav-item"><a href="company.html" class="smooth-lift" data-i18n="nav.company">شرکت</a></div><div class="nav-item"><a href="contact.html" class="smooth-lift" data-i18n="nav.contact">تماس</a></div><div class="nav-item"><a href="contact.html" class="nav-cta smooth-lift" data-i18n="nav.cta">درخواست دمو</a></div></div><div class="nav-desktop"><div class="nav-item"><a href="index.html" class="smooth-lift" data-i18n="nav.home">خانه</a></div><div class="nav-item"><a href="hardware.html" class="smooth-lift is-current" data-i18n="nav.hardware">سخت‌افزار</a></div><div class="nav-item" data-dropdown="software"><a href="software.html" class="smooth-lift"><span data-i18n="nav.software">نرم‌افزار</span> <span class="nav-dropdown-toggle" role="button" aria-label="زیرمنو"></span></a><div class="nav-dropdown"><a href="software.html#ch-telemetry" class="smooth-lift" data-i18n="nav.sw.telemetry">پایش زنده</a><a href="software.html#ch-dashboard" class="smooth-lift" data-i18n="nav.sw.dashboard">داشبورد</a><a href="software.html#ch-map" class="smooth-lift" data-i18n="nav.sw.map">نقشهٔ دستگاه‌ها</a><a href="software.html#ch-devices" class="smooth-lift" data-i18n="nav.sw.devices">مدیریت دستگاه‌ها</a><a href="software.html#ch-geofences" class="smooth-lift" data-i18n="nav.sw.geofences">محدوده‌ها</a><a href="software.html#ch-notifications" class="smooth-lift" data-i18n="nav.sw.notifications">اعلان‌ها</a><a href="software.html#ch-reports" class="smooth-lift" data-i18n="nav.sw.reports">گزارش‌ها</a><a href="software.html#ch-custom-dev" class="smooth-lift" data-i18n="nav.sw.custom">توسعه اختصاصی</a></div></div><div class="nav-item"><a href="company.html" class="smooth-lift" data-i18n="nav.company">شرکت</a></div><div class="nav-item"><a href="contact.html" class="smooth-lift" data-i18n="nav.contact">تماس</a></div><div class="nav-item"><a href="contact.html" class="nav-cta smooth-lift" data-i18n="nav.cta">درخواست دمو</a></div></div></nav>
+
+        <!-- Top-Left Sliding Language Drawer Switcher (FA / EN / AR) -->
+        <div class="lang-switcher" id="lang-switcher" style="--lang-idx: 0">
+          <button
+            type="button"
+            class="lang-trigger"
+            id="lang-trigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="lang-drawer-tray"
+            aria-label="تغییر زبان سایت — Change Language"
+          >
+            <span class="lang-trigger-label" id="lang-current-name">فارسی</span>
+            <span class="lang-trigger-code" id="lang-current-code" dir="ltr">FA</span>
+            <svg viewBox="0 0 16 16" class="lang-chevron-svg" aria-hidden="true" fill="none">
+              <path d="M4.2 6.2L8 10L11.8 6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <!-- Sliding Frosted-Glass Drawer Tray -->
+          <div class="lang-drawer-tray" id="lang-drawer-tray" role="listbox" aria-label="انتخاب زبان">
+            <div class="lang-drawer-inner">
+              <div class="lang-drawer-head" aria-hidden="true">
+                <span class="lang-drawer-grip"></span>
+                <span class="lang-drawer-caption" data-i18n="lang.caption">انتخاب زبان نمایش</span>
+              </div>
+
+              <div class="lang-options-track">
+                <div class="lang-active-glider" aria-hidden="true"></div>
+
+                <button type="button" class="lang-opt-btn is-active" role="option" aria-selected="true" data-lang="fa" data-idx="0">
+                  <span class="lang-opt-crest" aria-hidden="true">
+                    <span class="crest-glyph">ف</span>
+                  </span>
+                  <span class="lang-opt-copy">
+                    <strong>فارسی</strong>
+                    <small dir="ltr">FA · Persian</small>
+                  </span>
+                  <span class="lang-opt-dot" aria-hidden="true"></span>
+                </button>
+
+                <button type="button" class="lang-opt-btn" role="option" aria-selected="false" data-lang="en" data-idx="1">
+                  <span class="lang-opt-crest" aria-hidden="true">
+                    <span class="crest-glyph" dir="ltr">EN</span>
+                  </span>
+                  <span class="lang-opt-copy">
+                    <strong dir="ltr">English</strong>
+                    <small>انگلیسی · International</small>
+                  </span>
+                  <span class="lang-opt-dot" aria-hidden="true"></span>
+                </button>
+
+                <button type="button" class="lang-opt-btn" role="option" aria-selected="false" data-lang="ar" data-idx="2">
+                  <span class="lang-opt-crest" aria-hidden="true">
+                    <span class="crest-glyph">ع</span>
+                  </span>
+                  <span class="lang-opt-copy">
+                    <strong>العربية</strong>
+                    <small dir="ltr">AR · عربی</small>
+                  </span>
+                  <span class="lang-opt-dot" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+<main class="pres-main">
+<section class="chapter page-hero" id="ch-page-hero"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span data-i18n="ph.hw.tag">سخت‌افزار و تله‌متری</span></div><h1 data-i18n="ph.hw.h1">سخت‌افزارهای ردیابی GPS؛ انتخاب بر اساس خروجی نرم‌افزاری در MyFarzam</h1><p data-i18n="ph.hw.p">آتی‌فرزام مدل‌های متنوعی از ردیاب‌های خودرویی و صنعتی را تأمین می‌کند. هر ردیاب و سنسور جانبی، داده‌ها و گزارش‌های مشخصی را در سامانه MyFarzam فعال می‌سازد.</p></div><div class="rgrid g4 pillars"><article class="rcard reveal"><span class="rn" dir="ltr">01 / GNSS + SIM (IMEI)</span><h3>موقعیت‌یابی و اتصال پایه</h3><p>فعال‌ساز نقشه زنده، گزارش پیمایش، سفر، توقف، محدوده و نقشه حرارتی</p></article><article class="rcard reveal"><span class="rn" dir="ltr">02 / IGNITION (ACC)</span><h3>ورودی تشخیص سوئیچ</h3><p>فعال‌ساز شاخص «دستگاه روشن» در داشبورد، اعلان استارت و ساعت کارکرد موتور</p></article><article class="rcard reveal"><span class="rn" dir="ltr">03 / TEMPERATURE I/O</span><h3>درگاه سنسور دما</h3><p>فعال‌ساز «گزارش تاریخچه دما» با خروجی Excel برای نظارت بر زنجیره سرد</p></article><article class="rcard reveal"><span class="rn" dir="ltr">04 / FUEL &amp; VOLTAGE</span><h3>تله‌متری سوخت و ولتاژ</h3><p>فعال‌ساز رویداد «نشت سوخت»، مصرف سوخت در گزارش روزانه/عملکرد و ولتاژ نقطه</p></article></div></div></section>
+<section class="chapter section-space" id="ch-catalog"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span>کاتالوگ ردیاب‌ها</span></div><h2>کاتالوگ ردیاب‌ها به تفکیک کلاس کاربری</h2><p>روی هر مدل کلیک کنید تا درخواست استعلام همان مدل باز شود؛ ورودی‌ها و قابلیت‌های فعال‌شده در MyFarzam روی کارت هر مدل آمده است.</p></div><div class="catalog-filters" id="catalog-filters"></div><div class="catalog-grid" id="catalog-grid"></div><p class="spec-note" data-i18n="hw.specNote">انتخاب مدل نهایی و تیپ سنسورها پس از بررسی نوع خودروها (سبک، سنگین یا یخچالی) توسط تیم فنی انجام می‌شود؛ ثبت هر ردیاب در MyFarzam با شناسه IMEI و شمارهٔ سیم‌کارت انجام می‌شود.</p></div></section>
+<section class="chapter section-space" id="ch-matrix"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span>ماتریس تناظر فنی</span></div><h2>جدول تناظر سخت‌افزار و سنسورها با قابلیت‌های نرم‌افزار MyFarzam</h2><p>این جدول دقیقاً مشخص می‌کند که برای دریافت هر گزارش یا شاخص در سامانه MyFarzam، ردیاب انتخابی شما باید دارای چه ورودی یا سنسوری باشد.</p></div><div class="mx-wrap silk-card reveal"><table class="mx"><thead><tr><th>سخت‌افزار یا سنسور ورودی</th><th>قابلیت‌ها، شاخص‌ها و گزارش‌های تغذیه‌شونده در MyFarzam</th><th>فیلتر مدل‌های سازگار</th></tr></thead><tbody><tr><th scope="row">ردیاب GPS دارای شناسه IMEI/ID</th><td>ثبت دستگاه در حساب، نقشه زنده، تازگی آخرین موقعیت، گزارش‌های پیمایش، سفر، توقف، محدوده و نقشه حرارتی</td><td><span class="mx-tag">همه مدل‌ها</span></td></tr><tr><th scope="row">سیم‌کارت مخابراتی ردیاب (Cellular SIM)</th><td>ثبت شماره سیم‌کارت در مخزن دستگاه‌ها، وضعیت اتصال، زمان آخرین اتصال و اعلان سیستمی «عدم دریافت داده جدید»</td><td><span class="mx-tag">همه مدل‌ها</span></td></tr><tr><th scope="row">ورودی سوئیچ و برق خودرو (Ignition / ACC)</th><td>شاخص KPI «دستگاه‌های روشن» در داشبورد، اعلان‌های روشن/خاموش شدن سوئیچ، و فیلدهای مدت روشن بودن موتور در گزارش روزانه و عملکرد</td><td><span class="mx-tag">مدل‌های ACCدار</span></td></tr><tr><th scope="row">تله‌متری حرکت و سرعت (Motion &amp; Speed)</th><td>شاخص KPI «در حال حرکت»، اعلان شروع حرکت/توقف/سرعت غیرمجاز، نمودارهای سرعت داشبورد و گزارش‌های پیمایش/سفر/روزانه/عملکرد/توقف</td><td><span class="mx-tag">همه مدل‌ها</span></td></tr><tr><th scope="row">تله‌متری ولتاژ و تغذیه (Voltage Telemetry)</th><td>گزینه انتخابی «نمایش ولتاژ نقطه (Include point voltage)» در بازسازی مسیر گزارش پیمایش</td><td><span class="mx-tag">مدل‌های سازمانی</span></td></tr><tr><th scope="row">سنسور دما یا ردیاب مجهز به درگاه دما</th><td>فعال‌سازی کامل «گزارش دما (Temperature Report)» با جدول زمان و دما برای پایش زنجیره سرد و محیط</td><td><span class="mx-tag">مدل‌های زنجیره سرد</span></td></tr><tr><th scope="row">سنسور سوخت یا محاسبه‌گر سازگار سوخت</th><td>فعال‌سازی فیلتر رویداد «نشت سوخت (Fuel leak)» در گزارش رویداد و ستون «مصرف سوخت» در گزارش روزانه و گزارش عملکرد</td><td><span class="mx-tag">مدل‌های سنسورمحور</span></td></tr><tr><th scope="row">هندسه محدوده (در نرم‌افزار) + GPS ردیاب</th><td>تشخیص رویدادهای «ورود به محدوده» و «خروج از محدوده» و تولید «گزارش محدوده (Geofence Report)» در ساعات کاری</td><td><span class="mx-tag">همه مدل‌ها</span></td></tr></tbody></table></div></div></section>
+<section class="chapter hw-hero" id="ch-hw-hero"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span>معماری ۴ لایه سخت‌افزار صنعتی</span></div><h2>مهندسی داخلی ردیاب؛ پایداری داده از جاده تا سرور</h2><p>اسکرول کنید تا لایه‌ها از هم جدا شوند، یا روی هر لایه هاور/کلیک کنید تا نقش آن در تضمین صحت گزارش‌های MyFarzam مشخص شود.</p></div></div><div class="xv-wrap" id="xv-wrap"><div class="xv-sticky container"><div class="xv-stage"><svg class="xv-svg" viewBox="0 0 400 450" role="img" aria-label="نمای انفجاری ردیاب"><g class="xv-layer l3"><polygon class="s-l" points="80,322 200,382 200,426 80,366"/><polygon class="s-r" points="200,382 320,322 320,366 200,426"/><polygon class="s-t" points="200,262 320,322 200,382 80,322"/></g><g class="xv-layer l2"><polygon class="s-l" points="80,296 200,356 200,382 80,322"/><polygon class="s-r" points="200,356 320,296 320,322 200,382"/><polygon class="s-t" points="200,236 320,296 200,356 80,296"/><line class="bat" x1="150" y1="246" x2="250" y2="296"/></g><g class="xv-layer l1"><polygon class="s-l" points="80,282 200,342 200,354 80,294"/><polygon class="s-r" points="200,342 320,282 320,294 200,354"/><polygon class="s-t" points="200,222 320,282 200,342 80,282"/><polygon class="chip" points="200,236 250,262 200,288 150,262"/></g><g class="xv-layer l0"><polygon class="s-l" points="80,270 200,330 200,340 80,280"/><polygon class="s-r" points="200,330 320,270 320,280 200,340"/><polygon class="s-t" points="200,210 320,270 200,330 80,270"/><polygon class="chip" points="200,236 240,256 200,276 160,256"/><polygon class="chip" points="200,246 224,258 200,270 176,258"/></g></svg></div><ol class="xv-list"><li class="xv-item" data-i="0" tabindex="0"><b dir="ltr">01</b><div><strong>آنتن GNSS</strong><span>گیرندهٔ ماهواره‌ای چندسامانه‌ای: دریافت هم‌زمان سیگنال‌های GPS / GLONASS برای ثبت مختصات و سرعت دقیق در معابر شهری و جاده‌ای.</span></div></li><li class="xv-item" data-i="1" tabindex="0"><b dir="ltr">02</b><div><strong>مودم سیم‌کارتی و حافظه آفلاین</strong><span>ذخیره خودکار هزاران نقطه در مناطق کور آنتن‌دهی و ارسال یکپارچه به MyFarzam بلافاصله پس از اتصال مجدد.</span></div></li><li class="xv-item" data-i="2" tabindex="0"><b dir="ltr">03</b><div><strong>باتری پشتیبان داخلی</strong><span>تداوم کارکرد ردیاب هنگام قطع برق اصلی خودرو و ثبت آخرین وضعیت اتصال در سامانه مرکزی.</span></div></li><li class="xv-item" data-i="3" tabindex="0"><b dir="ltr">04</b><div><strong>درگاه‌های سنسور و تغذیه صنعتی</strong><span>بسته به مدل انتخابی: پشتیبانی از تغذیه خودروهای سبک و سنگین (۹ تا ۳۶ ولت)، گواهی IP65 و ورودی‌های ACC/دما/سوخت.</span></div></li></ol></div></div></section>
+<section class="chapter section-space" id="ch-hw-cta"><div class="container"><div class="cta-card silk-card reveal"><h2>سخت‌افزار مناسب ناوگان شما را انتخاب کنیم</h2><p>تعداد و نوع خودروها و سنسورهای موردنیاز (ACC، دما، سوخت) را بگویید؛ تیم ما مدل سازگار و پیش‌فاکتور را آماده می‌کند.</p><div class="cta-actions"><a class="btn-orange smooth-lift" href="contact.html">استعلام قیمت سخت‌افزار</a><a class="btn-outline-navy smooth-lift" href="software.html">نرم‌افزار MyFarzam</a></div></div></div></section>
+<div class="page-bottom-gradient" aria-hidden="true"></div>
+</main>
+<section class="cta-band"><div class="container cta-band-in"><div><h2 data-i18n="ctaBand.title">آمادهٔ تجهیز ناوگان یا مشاهدهٔ دموی زندهٔ MyFarzam هستید؟</h2><p data-i18n="ctaBand.desc">ترکیب خودروها و سنسورهای موردنیازتان را بگویید تا جلسهٔ دموی آنلاین و پیش‌فاکتور اختصاصی را برایتان آماده کنیم.</p></div><a class="btn-orange smooth-lift" href="contact.html" data-i18n="ctaBand.btn">هماهنگی دموی آنلاین و استعلام قیمت</a></div></section><footer class="pres-footer"><div class="container pres-footer-inner"><nav class="foot-links" aria-label="پیوندهای پایین صفحه"><a href="index.html" data-i18n="nav.home">خانه</a><a href="hardware.html" data-i18n="nav.hardware">سخت‌افزار</a><a href="software.html" data-i18n="nav.software">نرم‌افزار</a><a href="company.html" data-i18n="nav.company">شرکت</a><a href="contact.html" data-i18n="nav.contact">تماس</a></nav><span data-i18n="footer.copy">سامانه مدیریت ناوگان آتی‌فرزام (GPS و ردیاب خودرو)</span><span dir="ltr">AtiFarzam Fleet Management System</span></div></footer><a class="sticky-cta" href="contact.html" data-i18n="sticky.cta">درخواست دمو و استعلام قیمت</a>
+<script defer src="./src/motions.js"></script>
+<script defer src="./src/presentation.js"></script>
+<script defer src="./src/products.js"></script>
+<script defer src="./src/pages.js"></script>
+</body>
+</html>

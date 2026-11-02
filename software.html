@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html data-page="software" lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#8A95A0" />
+    <meta name="description" content="ارائه تعاملی سامانه مدیریت ناوگان آتی فرزام — موقعیت‌یابی لحظه‌ای خودرو، پایش مسیرهای حرکتی و فواید ردیاب هوشمند GPS" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:title" content="مدیریت ناوگان آتی فرزام | GPS و ردیاب هوشمند خودرو" />
+    <meta property="og:description" content="پایش لحظه‌ای مسیر، شبیه‌ساز زنده تله‌متری و فواید عملیاتی سامانه ردیاب خودرو آتی فرزام" />
+    <link rel="icon" type="image/svg+xml" href="./assets/images/af-logo.svg" />
+    <title>نرم‌افزار پایش ناوگان | آتی‌فرزام</title>
+    <link rel="preload" href="./assets/fonts/Peyda-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./assets/fonts/Peyda-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./src/presentation.css" />
+<link rel="stylesheet" href="./src/pages.css" />
+    <style id="af-motion-styles"></style>
+  </head>
+  <body>
+    <!-- Page Top Gradient -->
+    <div class="page-top-gradient" aria-hidden="true"></div>
+    
+    <!-- Kinetic Interactive Micro-Dot Field + Architectural Background Rings -->
+    <div class="bg-kinetic-stage" aria-hidden="true">
+      <canvas class="bg-dots-canvas" id="bg-dots-canvas"></canvas>
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" class="bg-kinetic-svg">
+        <g id="bg-wheel-left" transform="translate(190, 210)">
+          <circle cx="0" cy="0" r="310" fill="none" stroke="#102333" stroke-opacity="0.045" stroke-width="1.2" stroke-dasharray="10 14" />
+          <circle cx="0" cy="0" r="230" fill="none" stroke="#f05327" stroke-opacity="0.065" stroke-width="1.3" stroke-dasharray="48 28" />
+        </g>
+        <g id="bg-wheel-right" transform="translate(1260, 700)">
+          <circle cx="0" cy="0" r="360" fill="none" stroke="#102333" stroke-opacity="0.04" stroke-width="1.3" stroke-dasharray="22 16" />
+          <circle cx="0" cy="0" r="260" fill="none" stroke="#f05327" stroke-opacity="0.06" stroke-width="1.6" stroke-dasharray="80 40" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Top Orange Scroll Progress Beam -->
+    <div class="scroll-line" id="scroll-line" aria-hidden="true"></div>
+
+    <!-- ===================================================================
+         MINIMALIST ORANGE-GLASS SCROLL LINE + BORDERLESS FROSTED TRAVELER
+         =================================================================== -->
+    <aside class="scroll-rail" id="scroll-journey" aria-hidden="true">
+      <div class="scroll-rail-track">
+        <!-- Translucent Orange Glass Progress Fill -->
+        <div class="scroll-rail-fill" id="scroll-rail-fill"></div>
+      </div>
+
+      <!-- Contour-Trace (ترسیم خطی) Emblem inside 30% Borderless Frosted-Glass Circle -->
+      <div class="scroll-trace-traveler" id="scroll-trace-traveler">
+        <svg viewBox="-900 -900 1800 1800" class="scroll-trace-svg" id="scroll-trace-svg"></svg>
+      </div>
+    </aside>
+
+    <!-- Minimal Floating Presentation Header -->
+    <header class="top-bar" id="top-bar">
+      <div class="container top-bar-inner">
+        <a href="index.html" class="brand-cluster smooth-lift" aria-label="سامانه مدیریت ناوگان آتی‌فرزام">
+          <img src="./assets/images/af-logo.svg" alt="" class="nav-af-mark" width="30" height="30" />
+          <div class="nav-divider"></div>
+          <img src="./assets/images/typography-fa.svg" alt="آتی‌فرزام" class="nav-fa-type" width="66" height="22" />
+          <img src="./assets/images/typography-en.svg" alt="AtiFarzam" class="nav-en-type" width="96" height="20" />
+        </a>
+
+        <nav class="top-nav" aria-label="صفحه‌های سایت"><button type="button" class="nav-hamburger" id="nav-hamburger" aria-label="منوی ناوبری" aria-expanded="false" aria-controls="nav-mobile-menu"><span></span><span></span><span></span></button><div class="nav-mobile-overlay" id="nav-mobile-overlay"></div><div class="nav-mobile-menu" id="nav-mobile-menu"><div class="nav-item"><a href="index.html" class="smooth-lift" data-i18n="nav.home">خانه</a></div><div class="nav-item"><a href="hardware.html" class="smooth-lift" data-i18n="nav.hardware">سخت‌افزار</a></div><div class="nav-item" data-dropdown="software"><a href="software.html" class="smooth-lift is-current">نرم‌افزار <span class="nav-dropdown-toggle"></span></a><div class="nav-dropdown"><a href="software.html#ch-telemetry" class="smooth-lift" data-i18n="nav.sw.telemetry">پایش زنده</a><a href="software.html#ch-dashboard" class="smooth-lift" data-i18n="nav.sw.dashboard">داشبورد</a><a href="software.html#ch-map" class="smooth-lift" data-i18n="nav.sw.map">نقشهٔ دستگاه‌ها</a><a href="software.html#ch-devices" class="smooth-lift" data-i18n="nav.sw.devices">مدیریت دستگاه‌ها</a><a href="software.html#ch-geofences" class="smooth-lift" data-i18n="nav.sw.geofences">محدوده‌ها</a><a href="software.html#ch-notifications" class="smooth-lift" data-i18n="nav.sw.notifications">اعلان‌ها</a><a href="software.html#ch-reports" class="smooth-lift" data-i18n="nav.sw.reports">گزارش‌ها</a><a href="software.html#ch-custom-dev" class="smooth-lift" data-i18n="nav.sw.custom">توسعه اختصاصی</a></div></div><div class="nav-item"><a href="company.html" class="smooth-lift" data-i18n="nav.company">شرکت</a></div><div class="nav-item"><a href="contact.html" class="smooth-lift" data-i18n="nav.contact">تماس</a></div><div class="nav-item"><a href="contact.html" class="nav-cta smooth-lift" data-i18n="nav.cta">درخواست دمو</a></div></div><div class="nav-desktop"><div class="nav-item"><a href="index.html" class="smooth-lift" data-i18n="nav.home">خانه</a></div><div class="nav-item"><a href="hardware.html" class="smooth-lift" data-i18n="nav.hardware">سخت‌افزار</a></div><div class="nav-item" data-dropdown="software"><a href="software.html" class="smooth-lift is-current">نرم‌افزار <span class="nav-dropdown-toggle"></span></a><div class="nav-dropdown"><a href="software.html#ch-telemetry" class="smooth-lift" data-i18n="nav.sw.telemetry">پایش زنده</a><a href="software.html#ch-dashboard" class="smooth-lift" data-i18n="nav.sw.dashboard">داشبورد</a><a href="software.html#ch-map" class="smooth-lift" data-i18n="nav.sw.map">نقشهٔ دستگاه‌ها</a><a href="software.html#ch-devices" class="smooth-lift" data-i18n="nav.sw.devices">مدیریت دستگاه‌ها</a><a href="software.html#ch-geofences" class="smooth-lift" data-i18n="nav.sw.geofences">محدوده‌ها</a><a href="software.html#ch-notifications" class="smooth-lift" data-i18n="nav.sw.notifications">اعلان‌ها</a><a href="software.html#ch-reports" class="smooth-lift" data-i18n="nav.sw.reports">گزارش‌ها</a><a href="software.html#ch-custom-dev" class="smooth-lift" data-i18n="nav.sw.custom">توسعه اختصاصی</a></div></div><div class="nav-item"><a href="company.html" class="smooth-lift" data-i18n="nav.company">شرکت</a></div><div class="nav-item"><a href="contact.html" class="smooth-lift" data-i18n="nav.contact">تماس</a></div><div class="nav-item"><a href="contact.html" class="nav-cta smooth-lift" data-i18n="nav.cta">درخواست دمو</a></div></div></nav>
+
+        <!-- Top-Left Sliding Language Drawer Switcher (FA / EN / AR) -->
+        <div class="lang-switcher" id="lang-switcher" style="--lang-idx: 0">
+          <button
+            type="button"
+            class="lang-trigger"
+            id="lang-trigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="lang-drawer-tray"
+            aria-label="تغییر زبان سایت — Change Language"
+          >
+            <span class="lang-trigger-label" id="lang-current-name">فارسی</span>
+            <span class="lang-trigger-code" id="lang-current-code" dir="ltr">FA</span>
+            <svg viewBox="0 0 16 16" class="lang-chevron-svg" aria-hidden="true" fill="none">
+              <path d="M4.2 6.2L8 10L11.8 6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <!-- Sliding Frosted-Glass Drawer Tray -->
+          <div class="lang-drawer-tray" id="lang-drawer-tray" role="listbox" aria-label="انتخاب زبان">
+            <div class="lang-drawer-inner">
+              <div class="lang-drawer-head" aria-hidden="true">
+                <span class="lang-drawer-grip"></span>
+                <span class="lang-drawer-caption" data-i18n="lang.caption">انتخاب زبان نمایش</span>
+              </div>
+
+              <div class="lang-options-track">
+                <div class="lang-active-glider" aria-hidden="true"></div>
+
+                <button type="button" class="lang-opt-btn is-active" role="option" aria-selected="true" data-lang="fa" data-idx="0">
+                  <span class="lang-opt-crest" aria-hidden="true">
+                    <span class="crest-glyph">ف</span>
+                  </span>
+                  <span class="lang-opt-copy">
+                    <strong>فارسی</strong>
+                    <small dir="ltr">FA · Persian</small>
+                  </span>
+                  <span class="lang-opt-dot" aria-hidden="true"></span>
+                </button>
+
+                <button type="button" class="lang-opt-btn" role="option" aria-selected="false" data-lang="en" data-idx="1">
+                  <span class="lang-opt-crest" aria-hidden="true">
+                    <span class="crest-glyph" dir="ltr">EN</span>
+                  </span>
+                  <span class="lang-opt-copy">
+                    <strong dir="ltr">English</strong>
+                    <small>انگلیسی · International</small>
+                  </span>
+                  <span class="lang-opt-dot" aria-hidden="true"></span>
+                </button>
+
+                <button type="button" class="lang-opt-btn" role="option" aria-selected="false" data-lang="ar" data-idx="2">
+                  <span class="lang-opt-crest" aria-hidden="true">
+                    <span class="crest-glyph">ع</span>
+                  </span>
+                  <span class="lang-opt-copy">
+                    <strong>العربية</strong>
+                    <small dir="ltr">AR · عربی</small>
+                  </span>
+                  <span class="lang-opt-dot" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+<main class="pres-main">
+<section class="chapter page-hero" id="ch-page-hero"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span data-i18n="ph.sw.tag">پلتفرم نرم‌افزاری MyFarzam</span></div><h1 data-i18n="ph.sw.h1">سامانه مدیریت ناوگان MyFarzam؛ پایش، محدوده‌ها و ۹ گزارش تحلیلی</h1><p data-i18n="ph.sw.p">محیط کاربری کاملاً فارسی و راست‌به‌چپ (RTL) بدون نیاز به نصب؛ تبدیل تله‌متری خام ردیاب‌ها به شاخص‌های وضعیت ناوگان، هشدارهای دسته‌بندی‌شده و گزارش‌های آماده حسابرسی با خروجی Excel.</p></div></div></section>
+<section class="chapter section-space shots-chapter" id="ch-sw-show"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span>نگاهی به محصول</span></div><h2>نرم‌افزار از نزدیک</h2></div><figure class="shot shot-desktop shot-hero reveal" data-shot="dashboard"><div class="shot-bar"><i></i><i></i><i></i></div><div class="shot-body"><img alt="داشبورد اصلی نرم‌افزار" decoding="async" hidden><span class="shot-ph"><b>داشبورد اصلی نرم‌افزار</b><small>assets/screens/dashboard.png</small></span></div></figure><div class="shots-row"><figure class="shot shot-desktop  reveal" data-shot="map"><div class="shot-bar"><i></i><i></i><i></i></div><div class="shot-body"><img alt="نقشهٔ زندهٔ دستگاه‌ها" decoding="async" hidden><span class="shot-ph"><b>نقشهٔ زندهٔ دستگاه‌ها</b><small>assets/screens/map.png</small></span></div></figure><figure class="shot shot-desktop  reveal" data-shot="notifications"><div class="shot-bar"><i></i><i></i><i></i></div><div class="shot-body"><img alt="اعلان‌ها و هشدارها" decoding="async" hidden><span class="shot-ph"><b>اعلان‌ها و هشدارها</b><small>assets/screens/notifications.png</small></span></div></figure><figure class="shot shot-phone  reveal" data-shot="mobile"><div class="shot-notch"></div><div class="shot-body"><img alt="نسخهٔ موبایل" decoding="async" hidden><span class="shot-ph"><b>نسخهٔ موبایل</b><small>assets/screens/mobile.png</small></span></div></figure></div></div></section>
+<section class="chapter section-space" id="ch-software" data-section="ch-software">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="chapter-tag">
+              <span class="tag-beacon"></span>
+              <span data-i18n="sw.tag">نرم‌افزار</span>
+            </div>
+            <h2 data-i18n="sw.title">نرم‌افزار یکپارچه پایش و مدیریت هوشمند ناوگان</h2>
+            <p data-i18n="sw.desc">پلتفرم نرم‌افزاری آتی‌فرزام داده‌های لحظه‌ای سخت‌افزار را در قالب داشبوردهای شفاف، نقشه‌های تعاملی و گزارش‌های مدیریتی در اختیار شما قرار می‌دهد.</p>
+          </div>
+
+          <!-- 3 Unified Software Access Channels -->
+          <div class="sw-platforms-bar silk-card reveal">
+            <div class="sw-plat-item">
+              <div class="sw-plat-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="6" width="24" height="16" rx="3" />
+                  <line x1="11" y1="26" x2="21" y2="26" stroke="#f05327" />
+                  <line x1="16" y1="22" x2="16" y2="26" />
+                </svg>
+              </div>
+              <div class="sw-plat-copy">
+                <strong data-i18n="sw.p1.title">پنل تحت وب جامع</strong>
+                <span data-i18n="sw.p1.desc">پایش کامل ناوگان از طریق مرورگر بدون نیاز به نصب</span>
+              </div>
+            </div>
+
+            <div class="sw-plat-divider" aria-hidden="true"></div>
+
+            <div class="sw-plat-item">
+              <div class="sw-plat-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="4" width="14" height="24" rx="3.5" />
+                  <circle cx="16" cy="23.5" r="1.2" fill="#f05327" stroke="none" />
+                  <line x1="13.5" y1="7.5" x2="18.5" y2="7.5" stroke="#f05327" />
+                </svg>
+              </div>
+              <div class="sw-plat-copy">
+                <strong data-i18n="sw.p2.title">نسخه موبایل و واکنش‌گرا</strong>
+                <span data-i18n="sw.p2.desc">دسترسی سریع مدیران به موقعیت و اعلان‌ها در هر مکان</span>
+              </div>
+            </div>
+
+            <div class="sw-plat-divider" aria-hidden="true"></div>
+
+            <div class="sw-plat-item">
+              <div class="sw-plat-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="10 11 5 16 10 21" />
+                  <polyline points="22 11 27 16 22 21" />
+                  <line x1="18" y1="8" x2="14" y2="24" stroke="#f05327" />
+                </svg>
+              </div>
+              <div class="sw-plat-copy">
+                <strong data-i18n="sw.p3.title">وب‌سرویس و API سازمانی</strong>
+                <span data-i18n="sw.p3.desc">امکان یکپارچه‌سازی مستقیم با سامانه‌های داخلی سازمان</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+<div class="sw-tabs" id="sw-tabs"><div class="container sw-tabs-in" role="tablist" aria-label="بخش‌های نرم‌افزار"><button type="button" role="tab" aria-selected="true" class="is-on" data-g="mon" data-i18n="swtab.mon">پایش زنده</button><button type="button" role="tab" aria-selected="false" data-g="man" data-i18n="swtab.man">مدیریت</button><button type="button" role="tab" aria-selected="false" data-g="rep" data-i18n="swtab.rep">گزارش‌ها</button><button type="button" role="tab" aria-selected="false" data-g="ben" data-i18n="swtab.ben">مزایا</button></div></div>
+<div class="sw-group" data-g="mon">
+<section class="chapter section-space" id="ch-telemetry" data-section="ch-telemetry">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="chapter-tag">
+              <span class="tag-beacon"></span>
+              <span data-i18n="tel.tag">شبیه‌ساز زنده سامانه</span>
+            </div>
+            <h2 data-i18n="tel.title">دیدِ یکپارچه بر تمام نقاط مسیر</h2>
+            <p data-i18n="tel.desc">انتخاب هر واحد در شبکه، داده‌های موقعیت، سرعت، محدوده مجاز و وضعیت اتصال ردیاب را به نرمی همگام‌سازی می‌کند.</p>
+          </div>
+
+          <div class="telemetry-board reveal">
+            <div class="telemetry-topbar">
+              <div class="unit-tabs" id="unit-tabs" role="tablist" aria-label="واحدهای ناوگان">
+                <button type="button" class="unit-tab smooth-lift active" data-unit="0" data-i18n="tel.tab0">واحد ۱۰۴ · مسیر شمال‌غرب</button>
+                <button type="button" class="unit-tab smooth-lift" data-unit="1" data-i18n="tel.tab1">واحد ۲۰۸ · حلقه مرکزی</button>
+                <button type="button" class="unit-tab smooth-lift" data-unit="2" data-i18n="tel.tab2">واحد ۳۱۲ · محور جنوبی</button>
+              </div>
+              <div class="telemetry-live-tag">
+                <span class="pulse-beacon"></span>
+                <span dir="ltr">LIVE TELEMETRY</span>
+              </div>
+            </div>
+
+            <div class="telemetry-body">
+              <div class="map-canvas silk-card">
+                <svg viewBox="0 0 680 380" class="route-map-svg" aria-label="نقشه برداری مسیر ناوگان">
+                  <g stroke="#F2F4F8" stroke-opacity="0.09" stroke-width="1">
+                    <line x1="0" y1="76" x2="680" y2="76" />
+                    <line x1="0" y1="152" x2="680" y2="152" />
+                    <line x1="0" y1="228" x2="680" y2="228" />
+                    <line x1="0" y1="304" x2="680" y2="304" />
+                    <line x1="136" y1="0" x2="136" y2="380" />
+                    <line x1="272" y1="0" x2="272" y2="380" />
+                    <line x1="408" y1="0" x2="408" y2="380" />
+                    <line x1="544" y1="0" x2="544" y2="380" />
+                  </g>
+
+                  <circle id="map-geofence" cx="350" cy="190" r="112" fill="#f05327" fill-opacity="0.07" stroke="#f05327" stroke-opacity="0.38" stroke-width="1.6" stroke-dasharray="6 6" />
+
+                  <path d="M 60 310 Q 210 290 310 200 T 610 95" fill="none" stroke="#F2F4F8" stroke-opacity="0.16" stroke-width="2" />
+                  <path d="M 95 90 Q 250 130 350 190 T 590 295" fill="none" stroke="#F2F4F8" stroke-opacity="0.16" stroke-width="2" />
+
+                  <path id="map-active-route" d="M 78 286 C 178 286, 232 142, 350 168 C 452 190, 508 108, 604 108" fill="none" stroke="#f05327" stroke-width="3.8" stroke-linecap="round" />
+
+                  <circle id="map-start-pt" cx="78" cy="286" r="6" fill="#F2F4F8" />
+                  <circle id="map-end-pt" cx="604" cy="108" r="6" fill="#F2F4F8" fill-opacity="0.45" />
+
+                  <g id="map-active-pin" transform="translate(350, 168)">
+                    <circle cx="0" cy="0" r="24" fill="#f05327" fill-opacity="0.24" class="pin-pulse-ring" />
+                    <circle cx="0" cy="0" r="9.5" fill="#f05327" stroke="#F2F4F8" stroke-width="3" />
+                  </g>
+                </svg>
+
+                <div class="map-sync-overlay" id="map-sync-overlay" hidden>
+                  <!-- Motion #10: ورق‌خوردن چهارگانه (Klein Flip) -->
+                  <div id="map-sync-loader" class="motion-host"></div>
+                  <span data-i18n="tel.syncing">همگام‌سازی موقعیت ماهواره‌ای...</span>
+                </div>
+              </div>
+
+              <div class="telemetry-Readout silk-card" id="telemetry-readout">
+                <div class="readout-head">
+                  <span class="readout-code" id="rd-title">واحد ۱۰۴ · ناوگان توزیع</span>
+                  <span class="readout-badge" id="rd-status">در محدوده مجاز</span>
+                </div>
+
+                <div class="readout-grid">
+                  <div class="rd-item">
+                    <span data-i18n="tel.lblCoords">مختصات لحظه‌ای</span>
+                    <strong dir="ltr" id="rd-coords">35.7448° N, 51.3752° E</strong>
+                  </div>
+                  <div class="rd-item">
+                    <span data-i18n="tel.lblSpeed">سرعت حرکت</span>
+                    <strong id="rd-speed">۶۸ کیلومتر بر ساعت</strong>
+                  </div>
+                  <div class="rd-item">
+                    <span data-i18n="tel.lblDist">مسافت طی‌شده امروز</span>
+                    <strong id="rd-distance">۱۴۲.۶ کیلومتر</strong>
+                  </div>
+                  <div class="rd-item">
+                    <span data-i18n="tel.lblSignal">کیفیت سیگنال ردیاب</span>
+                    <strong id="rd-signal">۱۲ ماهواره متصل · عالی</strong>
+                  </div>
+                </div>
+
+                <div class="readout-stream">
+                  <!-- Motion #12: موج قطره‌ای خطی (Droplet Wave) -->
+                  <div id="readout-wave-slot" class="motion-host"></div>
+                  <span data-i18n="tel.stream">دریافت و به‌روزرسانی خودکار داده‌های ردیاب</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+<section class="chapter section-space" id="ch-dashboard" data-section="ch-dashboard">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="chapter-tag">
+              <span class="tag-beacon"></span>
+              <span data-i18n="db.tag">داشبورد مدیریتی</span>
+            </div>
+            <h2 data-i18n="db.title">پاسخ سریع به وضعیت ناوگان در یک نگاه</h2>
+            <p data-i18n="db.desc">داشبورد مرکزی با KPIهای زنده، نمودارهای زمانی و ورودی نقشه حرارتی برای نظارت کامل بر وضعیت ناوگان.</p>
+          </div>
+          <div class="db-kpi-grid">
+            <div class="db-kpi-card silk-card reveal">
+              <div class="db-kpi-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <rect x="4" y="4" width="24" height="24" rx="4"/>
+                  <line x1="12" y1="12" x2="20" y2="12"/>
+                  <line x1="12" y1="16" x2="20" y2="16"/>
+                  <line x1="12" y1="20" x2="20" y2="20"/>
+                </svg>
+              </div>
+              <div class="db-kpi-content">
+                <span class="db-kpi-label" data-i18n="db.k1">تعداد کل دستگاه‌ها</span>
+                <strong dir="ltr" class="db-kpi-value" data-i18n="db.k1v">۲۴۸</strong>
+              </div>
+            </div>
+            <div class="db-kpi-card silk-card reveal" style="--d: 0.06s">
+              <div class="db-kpi-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M16 4C10.5 4 6 8.5 6 13.5C6 20 16 28 16 28S26 20 26 13.5C26 8.5 21.5 4 16 4Z"/>
+                  <circle cx="16" cy="13" r="3" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="db-kpi-content">
+                <span class="db-kpi-label" data-i18n="db.k2">دستگاه‌های آنلاین</span>
+                <strong dir="ltr" class="db-kpi-value" data-i18n="db.k2v">۲۱۴</strong>
+              </div>
+            </div>
+            <div class="db-kpi-card silk-card reveal" style="--d: 0.12s">
+              <div class="db-kpi-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <polyline points="4 22 12 14 20 22"/>
+                  <path d="M12 14V4L20 14"/>
+                </svg>
+              </div>
+              <div class="db-kpi-content">
+                <span class="db-kpi-label" data-i18n="db.k3">دستگاه‌های در حال حرکت</span>
+                <strong dir="ltr" class="db-kpi-value" data-i18n="db.k3v">۱۸۹</strong>
+              </div>
+            </div>
+            <div class="db-kpi-card silk-card reveal" style="--d: 0.18s">
+              <div class="db-kpi-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="16" cy="16" r="8"/>
+                  <line x1="16" y1="12" x2="16" y2="16"/>
+                  <line x1="16" y1="20" x2="16" y2="24"/>
+                </svg>
+              </div>
+              <div class="db-kpi-content">
+                <span class="db-kpi-label" data-i18n="db.k4">آخرین موقعیت ثبت شده</span>
+                <strong dir="ltr" class="db-kpi-value" data-i18n="db.k4v">۳۲ ثانیه پیش</strong>
+              </div>
+            </div>
+          </div>
+          <div class="db-chart-bar silk-card reveal">
+            <div class="db-chart-head">
+              <span data-i18n="db.chartTitle">آمار ۷ روز گذشته</span>
+              <div class="db-period-tabs">
+                <button class="db-period-tab active" data-period="7" data-i18n="db.period7">۷ روز</button>
+                <button class="db-period-tab" data-period="14" data-i18n="db.period14">۱۴ روز</button>
+                <button class="db-period-tab" data-period="30" data-i18n="db.period30">۳۰ روز</button>
+              </div>
+            </div>
+            <div class="db-chart-visual">
+              <svg viewBox="0 0 400 120" preserveAspectRatio="none" class="db-sparkline">
+                <polyline fill="none" stroke="#f05327" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                  points="0,100 20,85 40,95 60,70 80,110 100,80 120,105 140,65 160,90 180,75 200,115 220,85 240,95 260,70 280,100 300,80 320,110 340,90 360,75 380,105 400,95"/>
+              </svg>
+            </div>
+            <div class="db-chart-legend">
+              <span data-i18n="db.legend1">بیشترین سرعت</span>
+              <span data-i18n="db.legend2">بیشترین مسافت</span>
+              <span data-i18n="db.legend3">میانگین سرعت</span>
+              <span data-i18n="db.legend4">تعداد توقف‌ها</span>
+            </div>
+          </div>
+        </div>
+      </section>
+<section class="chapter section-space" id="ch-map" data-section="ch-map">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="chapter-tag">
+              <span class="tag-beacon"></span>
+              <span data-i18n="map.tag">نقشه دستگاه‌ها</span>
+            </div>
+            <h2 data-i18n="map.title">موقعیت‌یابی فضایی ناوگان در یک نگاه</h2>
+            <p data-i18n="map.desc">نقشه تعاملی با امکان فیلتر دستگاه‌ها و گروه‌ها، لایه‌های مختلف نقشه و کنترل zoom و fullscreen.</p>
+          </div>
+          <div class="map-features-grid">
+            <article class="map-feature-card silk-card reveal">
+              <div class="map-feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M16 4C10.5 4 6 8.5 6 13.5C6 20 16 28 16 28S26 20 26 13.5C26 8.5 21.5 4 16 4Z"/>
+                  <circle cx="16" cy="13.5" r="3.5" fill="currentColor"/>
+                  <line x1="16" y1="4" x2="16" y2="8"/>
+                  <line x1="16" y1="24" x2="16" y2="28"/>
+                </svg>
+              </div>
+              <h3 data-i18n="map.f1.title">انتخاب دستگاه و گروه</h3>
+              <p data-i18n="map.f1.desc">فیلتر کردن دستگاه‌های قابل نمایش روی نقشه بر اساس گروه یا دستگاه خاص.</p>
+            </article>
+            <article class="map-feature-card silk-card reveal" style="--d: 0.08s">
+              <div class="map-feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <rect x="4" y="4" width="24" height="24" rx="4"/>
+                  <line x1="4" y1="16" x2="28" y2="16"/>
+                  <line x1="4" y1="8" x2="28" y2="8"/>
+                  <line x1="4" y1="24" x2="28" y2="24"/>
+                </svg>
+              </div>
+              <h3 data-i18n="map.f2.title">لایه‌های مختلف نقشه</h3>
+              <p data-i18n="map.f2.desc">تغییر لایهٔ نقشه و نمایش تمام‌صفحه.</p>
+            </article>
+            <article class="map-feature-card silk-card reveal" style="--d: 0.14s">
+              <div class="map-feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="16" cy="16" r="10"/>
+                  <line x1="16" y1="6" x2="16" y2="16"/>
+                  <line x1="6" y1="16" x2="26" y2="16"/>
+                </svg>
+              </div>
+              <h3 data-i18n="map.f3.title">کنترل zoom و fullscreen</h3>
+              <p data-i18n="map.f3.desc">مشاهده نقشه با جزئیات کامل در اندازه‌های مختلف و حالت تمام صفحه.</p>
+            </article>
+            <article class="map-feature-card silk-card reveal" style="--d: 0.2s">
+              <div class="map-feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M16 4C10.5 4 6 8.5 6 13.5C6 20 16 28 16 28S26 20 26 13.5C26 8.5 21.5 4 16 4Z"/>
+                  <path d="M16 10C12.7 10 10 12.7 10 16C10 19.3 12.7 22 16 22C19.3 22 22 19.3 22 16C22 12.7 19.3 10 16 10Z"/>
+                </svg>
+              </div>
+              <h3 data-i18n="map.f4.title">موقعیت و برچسب ردیاب‌ها</h3>
+              <p data-i18n="map.f4.desc">نمایش نشانه‌ها و برچسب‌های ردیاب‌ها روی نقشه با وضعیت لحظه‌ای.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+<section class="chapter section-space" id="ch-notifications" data-section="ch-notifications">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="chapter-tag">
+              <span class="tag-beacon"></span>
+              <span data-i18n="notif.tag">اعلان‌ها</span>
+            </div>
+            <h2 data-i18n="notif.title">نمایش تغییرات عملیاتی و خطرات سرویس/اشتراک</h2>
+            <p data-i18n="notif.desc">نمایش اعلان‌های هشدار، تعمیر و نگهداری و سیستمی به صورت طبقه‌بندی شده.</p>
+          </div>
+          <div class="notif-grid">
+            <article class="notif-card silk-card reveal">
+              <div class="notif-card-head">
+                <span class="notif-num" dir="ltr">01</span>
+                <span class="notif-pill alert" data-i18n="notif.f1.pill">هشدارها</span>
+              </div>
+              <h3 data-i18n="notif.f1.title">رویدادهای حرکتی و وضعیت ردیاب</h3>
+              <p data-i18n="notif.f1.desc">اعلان‌های روشن/خاموش شدن، شروع/توقف حرکت، سرعت غیرمجاز و موقعیت روی نقشه.</p>
+            </article>
+            <article class="notif-card silk-card reveal" style="--d: 0.08s">
+              <div class="notif-card-head">
+                <span class="notif-num" dir="ltr">02</span>
+                <span class="notif-pill maintenance" data-i18n="notif.f2.pill">تعمیر و نگهداری</span>
+              </div>
+              <h3 data-i18n="notif.f2.title">اعلان‌های سرویس دوره‌ای</h3>
+              <p data-i18n="notif.f2.desc">یادآوری‌های سرویس‌های برنامه‌ریزی شده با جزئیات متن مربوطه.</p>
+            </article>
+            <article class="notif-card silk-card reveal" style="--d: 0.14s">
+              <div class="notif-card-head">
+                <span class="notif-num" dir="ltr">03</span>
+                <span class="notif-pill system" data-i18n="notif.f3.pill">سیستمی</span>
+              </div>
+              <h3 data-i18n="notif.f3.title">اعلان‌های سیستمی و اشتراک</h3>
+              <p data-i18n="notif.f3.desc">اعلان‌های عدم دریافت داده جدید، انقضای اشتراک و یادآوری تمدید اشتراک.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+</div>
+<div class="sw-group" data-g="man" hidden>
+<section class="chapter section-space shots-chapter" id="ch-mg-shot"><div class="container"><figure class="shot shot-desktop shot-hero reveal" data-shot="geofences"><div class="shot-bar"><i></i><i></i><i></i></div><div class="shot-body"><img alt="تعریف محدوده‌های مجاز" decoding="async" hidden><span class="shot-ph"><b>تعریف محدوده‌های مجاز</b><small>assets/screens/geofences.png</small></span></div></figure></div></section>
+<section class="chapter section-space" id="ch-devices" data-section="ch-devices">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="chapter-tag">
+              <span class="tag-beacon"></span>
+              <span data-i18n="dev.tag">مدیریت دستگاه‌ها</span>
+            </div>
+            <h2 data-i18n="dev.title">نگهداری مخزن ردیاب‌ها و نمایش اطلاعات لحظه‌ای</h2>
+            <p data-i18n="dev.desc">لیست کامل دستگاه‌ها با امکان جستجو، فیلتر گروه، صفحه‌بندی و تازه‌سازی خودکار اطلاعات.</p>
+          </div>
+          <div class="dev-grid">
+            <article class="dev-card silk-card reveal">
+              <div class="dev-card-head">
+                <span class="dev-num" dir="ltr">01</span>
+                <span class="dev-pill" data-i18n="dev.f1.pill">لیست دستگاه‌ها</span>
+              </div>
+              <h3 data-i18n="dev.f1.title">مشاهده کامل مخزن ردیاب‌ها</h3>
+              <p data-i18n="dev.f1.desc">جدول کامل دستگاه‌ها با اطلاعات برچسب خودرو/شخص، شناسه دستگاه، شماره سیم‌کارت، پلاک، زمان آخرین موقعیت و اتصال.</p>
+            </article>
+            <article class="dev-card silk-card reveal" style="--d: 0.08s">
+              <div class="dev-card-head">
+                <span class="dev-num" dir="ltr">02</span>
+                <span class="dev-pill" data-i18n="dev.f2.pill">جستجو و فیلتر</span>
+              </div>
+              <h3 data-i18n="dev.f2.title">جستجوی متن و فیلتر گروه</h3>
+              <p data-i18n="dev.f2.desc">جستجوی سریع در لیست دستگاه‌ها بر اساس نام، شناسه یا گروه با امکان فیلتر کردن بر اساس گروه‌های تعریف شده.</p>
+            </article>
+            <article class="dev-card silk-card reveal" style="--d: 0.14s">
+              <div class="dev-card-head">
+                <span class="dev-num" dir="ltr">03</span>
+                <span class="dev-pill" data-i18n="dev.f3.pill">نمای نقشه</span>
+              </div>
+              <h3 data-i18n="dev.f3.title">مشاهده دستگاه‌ها روی نقشه</h3>
+              <p data-i18n="dev.f3.desc">نمایش موقعیت تمام دستگاه‌ها به صورت همزمان روی نقشه با امکان انتخاب و مشاهده جزئیات هر دستگاه.</p>
+            </article>
+            <article class="dev-card silk-card reveal" style="--d: 0.2s">
+              <div class="dev-card-head">
+                <span class="dev-num" dir="ltr">04</span>
+                <span class="dev-pill" data-i18n="dev.f4.pill">افزودن دستگاه</span>
+              </div>
+              <h3 data-i18n="dev.f4.title">اتصال ردیاب فیزیکی به حساب کاربری</h3>
+              <p data-i18n="dev.f4.desc">فرم ثبت دستگاه با اطلاعات اجباری شناسه IMEI، مدل ردیاب، شماره سیم‌کارت و برچسب خودرو/شخص با امکان انتخاب ساعت و منطقه زمانی.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+<section class="chapter section-space" id="ch-groups" data-section="ch-groups">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="chapter-tag">
+              <span class="tag-beacon"></span>
+              <span data-i18n="grp.tag">مدیریت گروه‌ها</span>
+            </div>
+            <h2 data-i18n="grp.title">سازماندهی ناوگان برای فیلتر، نقشه و گزارش‌های یکپارچه</h2>
+            <p data-i18n="grp.desc">امکان سازماندهی ناوگان در گروه‌های مختلف برای فیلتر کردن، استفاده در نقشه و گزارش‌های تحلیلی.</p>
+          </div>
+          <div class="grp-grid">
+            <article class="grp-card silk-card reveal">
+              <div class="grp-card-head">
+                <span class="grp-num" dir="ltr">01</span>
+                <span class="grp-pill" data-i18n="grp.f1.pill">جستجوی گروه‌ها</span>
+              </div>
+              <h3 data-i18n="grp.f1.title">جستجوی سریع در لیست گروه‌ها</h3>
+              <p data-i18n="grp.f1.desc">امکان جستجوی سریع در لیست گروه‌ها برای پیدا کردن گروه مورد نظر در زمان کوتاهی.</p>
+            </article>
+            <article class="grp-card silk-card reveal" style="--d: 0.08s">
+              <div class="grp-card-head">
+                <span class="grp-num" dir="ltr">02</span>
+                <span class="grp-pill" data-i18n="grp.f2.pill">افزودن گروه</span>
+              </div>
+              <h3 data-i18n="grp.f2.title">ایجاد گروه‌های جدید</h3>
+              <p data-i18n="grp.f2.desc">فرم ساده برای ایجاد گروه‌های جدید با امکان تخصیص دستگاه‌ها به هر گروه.</p>
+            </article>
+            <article class="grp-card silk-card reveal" style="--d: 0.14s">
+              <div class="grp-card-head">
+                <span class="grp-num" dir="ltr">03</span>
+                <span class="grp-pill" data-i18n="grp.f3.pill">تعداد دستگاه‌ها</span>
+              </div>
+              <h3 data-i18n="grp.f3.title">نمایش تعداد دستگاه‌ها در هر گروه</h3>
+              <p data-i18n="grp.f3.desc">مشاهده تعداد دستگاه‌های تخصیص داده شده به هر گروه به صورت لحظه‌ای.</p>
+            </article>
+            <article class="grp-card silk-card reveal" style="--d: 0.2s">
+              <div class="grp-card-head">
+                <span class="grp-num" dir="ltr">04</span>
+                <span class="grp-pill" data-i18n="grp.f4.pill">صفحه‌بندی</span>
+              </div>
+              <h3 data-i18n="grp.f4.title">مشاهده آسان لیست بلند</h3>
+              <p data-i18n="grp.f4.desc">امکان صفحه‌بندی لیست گروه‌ها برای نمایش آسان در صورت وجود گروه‌های متعدد.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+<section class="chapter section-space" id="ch-geofences" data-section="ch-geofences">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="chapter-tag">
+              <span class="tag-beacon"></span>
+              <span data-i18n="gf.tag">مدیریت محدوده‌ها</span>
+            </div>
+            <h2 data-i18n="gf.title">تعریف مکان‌های معنادار و تحلیل ورود/خروج</h2>
+            <p data-i18n="gf.desc">تعریف محدوده‌های جغرافیایی با هندسه دایره، چندضلعی یا چندخطی همراه با سرعت مجاز برای هر محدوده.</p>
+          </div>
+          <div class="gf-grid">
+            <article class="gf-card silk-card reveal">
+              <div class="gf-card-head">
+                <span class="gf-num" dir="ltr">01</span>
+                <span class="gf-pill" data-i18n="gf.f1.pill">جستجوی محدوده‌ها</span>
+              </div>
+              <h3 data-i18n="gf.f1.title">جستجوی سریع در لیست محدوده‌ها</h3>
+              <p data-i18n="gf.f1.desc">امکان جستجوی سریع در لیست محدوده‌های تعریف شده برای پیدا کردن محدوده مورد نظر.</p>
+            </article>
+            <article class="gf-card silk-card reveal" style="--d: 0.08s">
+              <div class="gf-card-head">
+                <span class="gf-num" dir="ltr">02</span>
+                <span class="gf-pill" data-i18n="gf.f2.pill">افزودن محدوده</span>
+              </div>
+              <h3 data-i18n="gf.f2.title">ایجاد محدوده‌های جدید</h3>
+              <p data-i18n="gf.f2.desc">فرم کامل برای ایجاد محدوده‌های جدید با امکان رسم دایره، چندضلعی یا چندخطی روی نقشه.</p>
+            </article>
+            <article class="gf-card silk-card reveal" style="--d: 0.14s">
+              <div class="gf-card-head">
+                <span class="gf-num" dir="ltr">03</span>
+                <span class="gf-pill" data-i18n="gf.f3.pill">سرعت مجاز</span>
+              </div>
+              <h3 data-i18n="gf.f3.title">تعریف سرعت مجاز برای هر محدوده</h3>
+              <p data-i18n="gf.f3.desc">امکان تعیین سقف سرعت مجاز برای هر محدوده به صورت جداگانه.</p>
+            </article>
+            <article class="gf-card silk-card reveal" style="--d: 0.2s">
+              <div class="gf-card-head">
+                <span class="gf-num" dir="ltr">04</span>
+                <span class="gf-pill" data-i18n="gf.f4.pill">صفحه‌بندی</span>
+              </div>
+              <h3 data-i18n="gf.f4.title">مشاهده آسان لیست بلند</h3>
+              <p data-i18n="gf.f4.desc">امکان صفحه‌بندی لیست محدوده‌ها برای نمایش آسان در صورت وجود محدوده‌های متعدد.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+<section class="chapter section-space" id="ch-profile" data-section="ch-profile">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="chapter-tag">
+              <span class="tag-beacon"></span>
+              <span data-i18n="profile.tag">پروفایل و تنظیمات</span>
+            </div>
+            <h2 data-i18n="profile.title">مدیریت دسترسی و ترجیحات شخصی</h2>
+            <p data-i18n="profile.desc">
+              نگهداری اطلاعات دسترسی حساب کاربری و تنظیمات نمایش محلی برای تجربه شخصی‌سازی شده.
+            </p>
+          </div>
+          <div class="profile-grid">
+            <article class="profile-card silk-card reveal">
+              <div class="profile-card-head">
+                <span class="profile-num" dir="ltr">01</span>
+                <span class="profile-pill" data-i18n="profile.f1.pill">اطلاعات حساب</span>
+              </div>
+              <h3 data-i18n="profile.f1.title">اطلاعات ورود و مدیریت سشن</h3>
+              <p data-i18n="profile.f1.desc">مدیریت اطلاعات کاربری، رمز عبور، سشن‌های فعال و امنیت حساب.</p>
+            </article>
+            <article class="profile-card silk-card reveal" style="--d: 0.08s">
+              <div class="profile-card-head">
+                <span class="profile-num" dir="ltr">02</span>
+                <span class="profile-pill" data-i18n="profile.f2.pill">تنظیمات زبان</span>
+              </div>
+              <h3 data-i18n="profile.f2.title">زبان، تقویم و منطقه زمانی</h3>
+              <p data-i18n="profile.f2.desc">تنظیم زبان رابط کاربری، نوع تقویم و منطقه زمانی محلی.</p>
+            </article>
+            <article class="profile-card silk-card reveal" style="--d: 0.14s">
+              <div class="profile-card-head">
+                <span class="profile-num" dir="ltr">03</span>
+                <span class="profile-pill" data-i18n="profile.f3.pill">اعلان‌ها</span>
+              </div>
+              <h3 data-i18n="profile.f3.title">تنظیمات دریافت اعلان‌ها</h3>
+              <p data-i18n="profile.f3.desc">مدیریت نوع اعلان‌ها، کانال‌های دریافت و ترجیحات اعلان.</p>
+            </article>
+            <article class="profile-card silk-card reveal" style="--d: 0.2s">
+              <div class="profile-card-head">
+                <span class="profile-num" dir="ltr">04</span>
+                <span class="profile-pill" data-i18n="profile.f4.pill">حریم خصوصی</span>
+              </div>
+              <h3 data-i18n="profile.f4.title">تنظیمات حریم خصوصی و دسترسی</h3>
+              <p data-i18n="profile.f4.desc">مدیریت مجوزها، دسترسی‌ها و تنظیمات حریم خصوصی حساب.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+</div>
+<div class="sw-group" data-g="rep" hidden>
+<section class="chapter section-space shots-chapter" id="ch-rp-shot"><div class="container"><figure class="shot shot-desktop shot-hero reveal" data-shot="reports"><div class="shot-bar"><i></i><i></i><i></i></div><div class="shot-body"><img alt="نمونه‌ای از گزارش مدیریتی" decoding="async" hidden><span class="shot-ph"><b>نمونه‌ای از گزارش مدیریتی</b><small>assets/screens/reports.png</small></span></div></figure></div></section>
+<section class="chapter section-space" id="ch-reports"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span>گزارش‌ها</span></div><h2>۹ گزارش تحلیلی با خروجی Excel</h2><p>خودرو یا گروه را انتخاب کنید، بازهٔ زمانی را بدهید، گزارش را بسازید و به Excel بگیرید.</p></div><ol class="flow reveal"><li>انتخاب خودرو یا گروه</li><li>بازهٔ زمانی</li><li>تولید گزارش</li><li>خروجی Excel</li></ol><div class="rgrid"><article class="rcard reveal"><span class="rn">۰۱</span><h3>گزارش پیمایش</h3><p>بازسازی مسیر خودرو در بازهٔ دلخواه، با فیلتر حذف سرعت صفر، پاکسازی پرش‌های GPS و نمایش ولتاژ نقطه.</p></article><article class="rcard reveal"><span class="rn">۰۲</span><h3>گزارش رویداد</h3><p>فیلتر هم‌زمان رویدادها: سرعت غیرمجاز، نشت سوخت، ورود و خروج از محدوده، سوئیچ و توقف، همراه با آدرس.</p></article><article class="rcard reveal"><span class="rn">۰۳</span><h3>گزارش روزانه</h3><p>کارنامهٔ شیفت: اولین روشن‌شدن و آخرین خاموشی سوئیچ، مسافت، زمان حرکت و توقف، و مصرف سوخت در صورت پشتیبانی دستگاه.</p></article><article class="rcard reveal"><span class="rn">۰۴</span><h3>گزارش عملکرد</h3><p>مقایسهٔ چند خودرو یا یک گروه در یک جدول: مسافت، سرعت، زمان حرکت و توقف و روشن‌بودن سوئیچ.</p><em>ویژهٔ ناوگان سازمانی</em></article><article class="rcard reveal"><span class="rn">۰۵</span><h3>گزارش توقف</h3><p>فهرست توقف‌ها با فیلتر حداقل و حداکثر مدت و آدرس دقیق هر توقف.</p></article><article class="rcard reveal"><span class="rn">۰۶</span><h3>گزارش سفر</h3><p>تفکیک کارکرد خودرو به سفرهای مجزا، با زمان، مسافت و سرعت هر سفر.</p></article><article class="rcard reveal"><span class="rn">۰۷</span><h3>گزارش محدوده</h3><p>زمان و مسافت خودرو داخل و بیرون هر محدوده، در ساعات کاری انتخابی.</p></article><article class="rcard reveal"><span class="rn">۰۸</span><h3>نقشهٔ حرارتی</h3><p>تراکم تردد یک گروه یا چند خودرو روی نقشه؛ نشان می‌دهد ناوگان بیشتر کجا فعالیت دارد.</p><em>ویژهٔ ناوگان سازمانی</em></article><article class="rcard reveal"><span class="rn">۰۹</span><h3>گزارش دما</h3><p>تاریخچهٔ دمای دریافتی از سنسور ردیاب؛ مناسب زنجیرهٔ سرد.</p><em>نیازمند سنسور دما</em></article></div></div></section>
+</div>
+<div class="sw-group" data-g="ben" hidden>
+<section class="chapter section-space" id="ch-benefits" data-section="ch-benefits">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="chapter-tag">
+              <span class="tag-beacon"></span>
+              <span data-i18n="ben.tag">ارزش‌آفرینی عملیاتی · فواید GPS</span>
+            </div>
+            <h2 data-i18n="ben.title">مزایا و فواید کلیدی استفاده از GPS و ردیاب هوشمند</h2>
+            <p data-i18n="ben.desc">استقرار سامانه ردیاب ماهواره‌ای آتی‌فرزام، علاوه بر امنیت لحظه‌ای، بهره‌وری ناوگان را افزایش داده و هزینه‌های پنهان نگهداری و پیمایش را به شکل ملموس کاهش می‌دهد.</p>
+          </div>
+
+          <div class="benefits-grid">
+            <article class="benefit-card silk-card reveal">
+              <div class="benefit-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 3L27 7.5V15.5C27 22.2 22.3 27.3 16 29.5C9.7 27.3 5 22.2 5 15.5V7.5L16 3Z" />
+                  <path d="M11.5 16L14.5 19L20.5 13" stroke="#f05327" />
+                </svg>
+              </div>
+              <span class="benefit-kicker" data-i18n="ben.b1.kicker">امنیت ۲۴ ساعته</span>
+              <h3 data-i18n="ben.b1.title">حفاظت و پیشگیری مؤثر از سرقت</h3>
+              <p data-i18n="ben.b1.desc">اعلان آنی در صورت حرکت غیرمجاز، لرزش یا جداسازی باتری و امکان ردیابی دقیق تا بازیابی کامل دارایی در شرایط اضطراری.</p>
+            </article>
+
+            <article class="benefit-card silk-card reveal" style="--d: 0.06s">
+              <div class="benefit-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="4 22 12 14 18 19 28 9" />
+                  <polyline points="21 9 28 9 28 16" stroke="#f05327" />
+                </svg>
+              </div>
+              <span class="benefit-kicker" data-i18n="ben.b2.kicker">صرفه‌جویی اقتصادی</span>
+              <h3 data-i18n="ben.b2.title">کاهش مصرف سوخت و استهلاک</h3>
+              <p data-i18n="ben.b2.desc">حذف ترددهای غیرضروری، کاهش زمان درجا کار کردن موتور و کنترل سرعت که هزینه‌های سوخت و تعمیرات دوره‌ای را بهینه می‌کند.</p>
+            </article>
+
+            <article class="benefit-card silk-card reveal" style="--d: 0.12s">
+              <div class="benefit-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="16" cy="16" r="12" />
+                  <polyline points="16 9 16 16 21 19" stroke="#f05327" />
+                </svg>
+              </div>
+              <span class="benefit-kicker" data-i18n="ben.b3.kicker">چابکی عملیاتی</span>
+              <h3 data-i18n="ben.b3.title">مدیریت زمان و بهینه‌سازی مسیر</h3>
+              <p data-i18n="ben.b3.desc">انتخاب بهترین مسیرهای اعزام، پایش دقیق زمان توقف در ایستگاه‌ها و افزایش تعداد ماموریت‌های موفق در هر روز کاری.</p>
+            </article>
+
+            <article class="benefit-card silk-card reveal" style="--d: 0.16s">
+              <div class="benefit-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="16" cy="16" r="12" />
+                  <circle cx="16" cy="16" r="4" stroke="#f05327" />
+                  <line x1="16" y1="4" x2="16" y2="8" />
+                  <line x1="16" y1="24" x2="16" y2="28" />
+                </svg>
+              </div>
+              <span class="benefit-kicker" data-i18n="ben.b4.kicker">کاهش ریسک</span>
+              <h3 data-i18n="ben.b4.title">ارتقای ایمنی رانندگی و محموله</h3>
+              <p data-i18n="ben.b4.desc">پایش رفتار حرکتی شامل ترمزهای شدید و تخطی از سرعت مجاز برای پیشگیری از حوادث جاده‌ای و حفظ سلامت سرنشینان و بار.</p>
+            </article>
+
+            <article class="benefit-card silk-card reveal" style="--d: 0.2s">
+              <div class="benefit-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="6" y="4" width="20" height="24" rx="4" />
+                  <line x1="11" y1="11" x2="21" y2="11" stroke="#f05327" />
+                  <line x1="11" y1="16" x2="21" y2="16" />
+                  <line x1="11" y1="21" x2="17" y2="21" />
+                </svg>
+              </div>
+              <span class="benefit-kicker" data-i18n="ben.b5.kicker">شفافیت مدیریتی</span>
+              <h3 data-i18n="ben.b5.title">مستندسازی خودکار و گزارش دقیق</h3>
+              <p data-i18n="ben.b5.desc">ثبت لحظه‌به‌لحظه پیمایش، کارکرد روزانه و تاریخچه کامل سفرها بدون خطای انسانی؛ آماده برای تحلیل و ارزیابی عملکرد.</p>
+            </article>
+
+            <article class="benefit-card silk-card reveal" style="--d: 0.24s">
+              <div class="benefit-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 4C10.5 4 6 8.3 6 13.6C6 20.8 16 28 16 28C16 28 26 20.8 26 13.6C26 8.3 21.5 4 16 4Z" />
+                  <circle cx="16" cy="13.5" r="3.5" stroke="#f05327" />
+                </svg>
+              </div>
+              <span class="benefit-kicker" data-i18n="ben.b6.kicker">اطمینان و هماهنگی</span>
+              <h3 data-i18n="ben.b6.title">تخمین دقیق زمان رسیدن (ETA)</h3>
+              <p data-i18n="ben.b6.desc">امکان اعلام دقیق موقعیت و زمان تحویل به مشتریان یا واحدهای سازمانی بر پایه داده‌های زنده ماهواره‌ای.</p>
+            </article>
+          </div>
+
+          <!-- Executive Summary Strip with Motions #10 (Klein Flip) & #12 (Droplet Wave) -->
+          <div class="benefits-impact-strip reveal">
+            <div class="impact-brand-cell">
+              <!-- Motion #10: ورق‌خوردن چهارگانه (Klein Flip) -->
+              <div id="benefits-flip-slot" class="motion-host"></div>
+              <div class="impact-brand-copy">
+                <strong data-i18n="ben.stripTitle">بازده پایدار در مقیاس سازمانی و شخصی</strong>
+                <span data-i18n="ben.stripSub">پایش هوشمند برای کنترل هزینه، افزایش امنیت و شفافیت کامل مسیرها</span>
+              </div>
+            </div>
+
+            <div class="impact-wave-pill">
+              <!-- Motion #12: موج قطره‌ای خطی (Droplet Wave) -->
+              <div id="benefits-wave-slot" class="motion-host"></div>
+              <span data-i18n="ben.stripWave">پایداری تبادل داده GPS</span>
+            </div>
+          </div>
+        </div>
+      </section>
+<section class="chapter section-space" id="ch-plans"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span>مقایسه سطوح کاربری و مزایا</span></div><h2>تفکیک قابلیت‌های اشتراک سازمانی و اشتراک شخصی در MyFarzam</h2><p>بر اساس معماری واقعی سامانه، حساب‌های سازمانی علاوه بر تمامی امکانات پایه، گردش‌کارهای گروهی و گزارش‌های مقایسه‌ای چنددستگاهی را در اختیار دارند.</p></div><div class="plans"><article class="plan plan-org silk-card reveal"><em dir="ltr">FLEET &amp; ENTERPRISE</em><h3>اشتراک سازمانی (Organisational Tier)</h3><p>ویژه شرکت‌های پخش، حمل‌ونقل، زنجیره سرد و سازمان‌ها</p><ul><li><b>مدیریت گروه‌ها (Groups)</b><span>دسته‌بندی ناوگان در واحدهای مجزا برای فیلتر سریع نقشه، لیست دستگاه‌ها و گزارش‌ها.</span></li><li><b>گزارش عملکرد چنددستگاهی</b><span>انتخاب یک گروه یا چندین خودرو به‌صورت هم‌زمان و مقایسه مسافت، سرعت، کارکرد موتور و سوخت در یک جدول.</span></li><li><b>نقشه حرارتی گروهی</b><span>تحلیل تراکم حضور و تردد کل یک گروه یا بخش منتخب ناوگان روی نقشه.</span></li><li><b>پایش زنجیره سرد و سوخت</b><span>گزارش تاریخچه دما و تشخیص رویداد نشت سوخت برای ناوگان تجاری مجهز به سنسور.</span></li><li><b>توسعه اختصاصی و وب‌سرویس</b><span>امکان اتصال به ERP سازمان و طراحی گزارش‌های سفارشی.</span></li></ul><a class="btn-orange smooth-lift" href="contact.html?service=hw-sw">استعلام تعرفه و دموی سازمانی</a></article><article class="plan silk-card reveal"><em dir="ltr">SINGLE VEHICLE</em><h3>اشتراک شخصی و پایه (Personal &amp; Base Tier)</h3><p>ویژه مالکان خودروی شخصی و پایش تک‌دارایی</p><ul><li><b>ثبت آسان با IMEI و سیم‌کارت</b><span>تعریف برچسب خودرو/شخص، پلاک و منطقه زمانی در پنل وب و موبایل.</span></li><li><b>موقعیت‌یابی زنده و اعلان‌های امنیت خودرو</b><span>مشاهده لحظه‌ای روی نقشه و دریافت هشدار روشن/خاموش شدن سوئیچ، حرکت و توقف.</span></li><li><b>گزارش‌های تک‌دستگاهی کامل</b><span>دسترسی به گزارش پیمایش (بازسازی مسیر)، گزارش سفرها، گزارش توقف‌ها، خلاصه روزانه و رویدادها با خروجی Excel.</span></li><li><b>یادآور سرویس دوره‌ای و اشتراک</b><span>دریافت اعلان‌های زمان تعویض روغن/سرویس و یادآوری تمدید اشتراک سالانه.</span></li></ul><a class="btn-outline-navy smooth-lift" href="contact.html?service=personal">سفارش ردیاب و اشتراک شخصی</a></article></div></div></section>
+</div>
+<section class="chapter section-space" id="ch-custom-dev"><div class="container"><div class="dev-card reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span>خدمات مهندسی و توسعه نرم‌افزار اختصاصی</span></div><h2>فراتر از محصول آماده؛ توسعه سفارشی و یکپارچه‌سازی با سامانه‌های سازمان شما</h2><p>از آنجا که سامانه MyFarzam از صفر تا صد توسط تیم مهندسی نرم‌افزار آتی‌فرزام طراحی و توسعه یافته است، سازمان شما محدود به امکانات از پیش‌تعریف‌شده نیست. ما ماژول‌های اختصاصی، گزارش‌های سفارشی و ارتباط دوطرفه با نرم‌افزارهای داخلی شما را پیاده‌سازی می‌کنیم.</p><div class="dev-grid g2"><div><b>۱. وب‌سرویس و اتصال به ERP سازمان</b><span>ارسال خودکار داده‌های پیمایش، زمان حضور در محدوده و مصرف سوخت به نرم‌افزارهای ERP، حواله بار، پخش و مالی سازمان از طریق API.</span></div><div><b>۲. طراحی گزارش‌ها و قوانین هشدار خاص</b><span>توسعه فرمول‌های محاسباتی ویژه، قوانین پیچیده شیفت و محدوده، و خروجی‌های اکسل منطبق با فرمت حسابرسی و پیمانکاری سازمان شما.</span></div><div><b>۳. پیاده‌سازی پروتکل ردیاب‌های موجود</b><span>اگر ناوگان شما از قبل به مدل‌های خاصی از ردیاب یا سنسور مجهز است، پروتکل مخابراتی آن‌ها را در هسته MyFarzam پیاده‌سازی و یکپارچه می‌کنیم.</span></div><div><b>۴. استقرار اختصاصی و سفارشی‌سازی پنل</b><span>امکان بررسی نیازهای امنیتی ویژه، سفارشی‌سازی داشبوردها بر اساس ساختار سلسله‌مراتبی سازمان و توسعه ماژول‌های نرم‌افزاری مکمل.</span></div></div><a class="btn-orange smooth-lift" href="contact.html?service=custom">درخواست جلسه فنی توسعه اختصاصی و API</a></div></div></section>
+<div class="page-bottom-gradient" aria-hidden="true"></div>
+</main>
+<section class="cta-band"><div class="container cta-band-in"><div><h2 data-i18n="ctaBand.title">آمادهٔ تجهیز ناوگان یا مشاهدهٔ دموی زندهٔ MyFarzam هستید؟</h2><p data-i18n="ctaBand.desc">ترکیب خودروها و سنسورهای موردنیازتان را بگویید تا جلسهٔ دموی آنلاین و پیش‌فاکتور اختصاصی را برایتان آماده کنیم.</p></div><a class="btn-orange smooth-lift" href="contact.html" data-i18n="ctaBand.btn">هماهنگی دموی آنلاین و استعلام قیمت</a></div></section><footer class="pres-footer"><div class="container pres-footer-inner"><nav class="foot-links" aria-label="پیوندهای پایین صفحه"><a href="index.html" data-i18n="nav.home">خانه</a><a href="hardware.html" data-i18n="nav.hardware">سخت‌افزار</a><a href="software.html" data-i18n="nav.software">نرم‌افزار</a><a href="company.html" data-i18n="nav.company">شرکت</a><a href="contact.html" data-i18n="nav.contact">تماس</a></nav><span data-i18n="footer.copy">سامانه مدیریت ناوگان آتی‌فرزام (GPS و ردیاب خودرو)</span><span dir="ltr">AtiFarzam Fleet Management System</span></div></footer><a class="sticky-cta" href="contact.html" data-i18n="sticky.cta">درخواست دمو و استعلام قیمت</a>
+<script defer src="./src/motions.js"></script>
+<script defer src="./src/presentation.js"></script>
+<script defer src="./src/products.js"></script>
+<script defer src="./src/pages.js"></script>
+</body>
+</html>

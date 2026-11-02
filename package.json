@@ -1,0 +1,15 @@
+{
+  "name": "atifarzam-presentation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AtiFarzam Fleet Management — interactive presentation website (GPS & smart vehicle tracking)",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
