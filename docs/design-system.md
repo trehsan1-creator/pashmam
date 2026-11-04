@@ -476,14 +476,47 @@ Only three motion types are used in the presentation:
 - Clear visual feedback
 - Intuitive navigation
 
-## File Structure
+## Premium Command Layer (2026)
 
-```
-farzam-features/
-├── README.md                  # Product capability map
-├── PRESENTATION_STRUCTURE.md  # Website structure documentation
-├── HARDWARE_DOCUMENTATION.md   # Hardware details
-├── SOFTWARE_DOCUMENTATION.md   # Software details
-├── BENEFITS_DOCUMENTATION.md   # Benefits and advantages
-└── DESIGN_SYSTEM.md           # Design system (this file)
-```
+`src/premium.css` + `src/premium.js` load after the base layer and lift the site from
+"soft glass presentation" to a **fleet command deck** identity. The base tokens stay
+intact; the premium layer adds a darker stage and stronger contrast.
+
+### New tokens
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--ink` | `#071320` | Hero / page-plate / footer background |
+| `--ink-2` | `#0a1a28` | Console and dark card surfaces |
+| `--ink-line` | `rgba(255,255,255,.10)` | Hairlines on dark |
+| `--orange-hot` | `#ff6a38` | Live accents, gradients, focus rings |
+| `--mono` | system mono stack | Telemetry labels, chapter numbers, micro-copy |
+
+### Hero (home)
+
+- Full-viewport dark stage with a perspective grid, ambient orange/blue glows, scan-line and a `GPS` outline watermark.
+- Split copy / console composition: oversized Persian headline with a gradient accent word, glass tag, two CTAs, and a 3-column proof strip along the bottom.
+- **Live console** (`#hero-console`): window chrome, animated route, geofence, radar sweep, vehicle chips, telemetry side panel, floating alert cards and a moving route runner. The data drifts every 3.4s (paused when the tab is hidden / reduced motion).
+- The console is `aria-hidden`; the hero copy remains the accessible content. A capability ticker closes the dark band.
+
+### Sub-page plates
+
+- Every `.page-hero` becomes a dark chapter plate with a perspective grid, ambient glow, rounded bottom corners and, on wide screens, a rotating `page-emblem` (big outlined chapter number + orbit rings) injected by `premium.js`.
+- Software / company plates add primary/secondary CTAs; hardware keeps its 4 dark-glass pillar cards.
+
+### Motion
+
+- Entrance choreography on the hero copy and console; pointer parallax on the hero scene; 3D tilt on the console; magnetic primary buttons; staggered reveal in card grids; animated ticker; logo orbit.
+- Everything respects `prefers-reduced-motion`.
+
+### Light sections
+
+- Warmer paper gradient with a fine grain overlay and the existing kinetic dot field.
+- Crisper cards (`rcard`, `aud`, `cinfo`): higher white opacity, inner highlight, orange top hairline on hover, deeper shadows.
+- Section rhythm opened up (`section-space` up to 118px), dark CTA/closing plates with grid + glow, deep footer with a ghost `ATIFARZAM` wordmark.
+
+### i18n
+
+Console and ticker labels use `data-i18n` keys (`console.*`, `tick.*`) added to
+`SHARED_I18N_ADDITIONS` for FA / EN / AR.
+

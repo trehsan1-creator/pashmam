@@ -140,9 +140,9 @@ function mountClosingCreamLogos() {
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32" aria-label="نشان آتی‌فرزام">
       <path fill="#F2F4F8" d="M810.77,440.18c-11.41,196.45-162.4,391.62-247.41,472.15-27.45,28.6-51.13,7.64-51.13-14.47v-448.12c0-18.81-13.94-34.32-32.08-36.76h-170.95c-20.72,0-37.18,16.44-37.18,36.85v447.34c0,16.33-13.23,29.56-29.55,29.56-8.17,0-15.55-3.32-20.91-8.66-5.36-5.34-8.66-12.74-8.66-20.91v-484.19c0-157.84,149.62-315.69,299.23-315.69h269.37c16.33,0,29.56,13.23,29.56,29.55s-13.23,29.56-29.56,29.56h-232.19c-20.72,0-37.18,16.46-37.18,36.87l.09,182.47c0,20.51,16.6,37.11,37.13,37.11h237.35c18.12.44,25.77,13.74,24.06,27.34Z"/>
     </svg>
-    <span style="width:5px;height:5px;border-radius:50%;background:#f05327;display:inline-block"></span>
+    <span class="af-dot" style="width:5px;height:5px;border-radius:50%;background:#f05327;display:inline-block"></span>
     <span style="font-weight:800;font-size:1.05rem;color:#F2F4F8">آتی‌فرزام</span>
-    <span style="width:5px;height:5px;border-radius:50%;background:#f05327;display:inline-block"></span>
+    <span class="af-dot" style="width:5px;height:5px;border-radius:50%;background:#f05327;display:inline-block"></span>
     <span dir="ltr" style="font-weight:800;font-size:0.95rem;letter-spacing:0.08em;color:#F2F4F8">ATIFARZAM</span>
   `;
 }
@@ -1276,6 +1276,8 @@ const SHARED_I18N_ADDITIONS = {
     "hero.m1Val": "۹", "hero.m1": "گزارش تحلیلی با خروجی Excel",
     "hero.m2Val": "۳", "hero.m2": "دستهٔ اعلان: هشدار، نگهداری، سیستم",
     "hero.m3Val": "API", "hero.m3": "اتصال دوطرفه به ERP سازمان",
+    "console.live": "زنده", "console.mapLabel": "تهران · ناوگان توزیع", "console.unit": "واحد ۱۰۴", "console.fenceUnit": "واحد ۲۰۸", "console.telemetry": "تله‌متری", "console.speed": "سرعت", "console.fuel": "سوخت", "console.temp": "دمای محموله", "console.signal": "سیگنال", "console.acc": "سوئیچ روشن", "console.alertTitle": "خروج از محدوده", "console.alertSub": "واحد ۲۰۸ · ۲ دقیقه پیش", "console.coldTitle": "دما در محدوده",
+    "tick.1": "پایش زندهٔ ناوگان", "tick.2": "محدوده‌های جغرافیایی", "tick.3": "۹ گزارش تحلیلی Excel", "tick.4": "سنسور دما و زنجیره سرد", "tick.5": "اتصال API به ERP", "tick.6": "توسعهٔ اختصاصی نرم‌افزار",
     "close.btnHw": "مشاهدهٔ سخت‌افزار", "close.btnDemo": "درخواست دمو",
     "ctaBand.title": "آمادهٔ تجهیز ناوگان یا مشاهدهٔ دموی زندهٔ MyFarzam هستید؟",
     "ctaBand.desc": "ترکیب خودروها و سنسورهای موردنیازتان را بگویید تا جلسهٔ دموی آنلاین و پیش‌فاکتور اختصاصی را برایتان آماده کنیم.",
@@ -1289,6 +1291,7 @@ const SHARED_I18N_ADDITIONS = {
     "ph.hw.tag": "سخت‌افزار و تله‌متری", "ph.hw.h1": "سخت‌افزارهای ردیابی GPS؛ انتخاب بر اساس خروجی نرم‌افزاری در MyFarzam",
     "ph.hw.p": "آتی‌فرزام مدل‌های متنوعی از ردیاب‌های خودرویی و صنعتی را تأمین می‌کند. هر ردیاب و سنسور جانبی، داده‌ها و گزارش‌های مشخصی را در سامانه MyFarzam فعال می‌سازد.",
     "ph.sw.tag": "پلتفرم نرم‌افزاری MyFarzam", "ph.sw.h1": "سامانه مدیریت ناوگان MyFarzam؛ پایش، محدوده‌ها و ۹ گزارش تحلیلی",
+    "ph.sw.cta2": "مشاهدهٔ ۹ گزارش تحلیلی",
     "ph.sw.p": "محیط کاربری کاملاً فارسی و راست‌به‌چپ (RTL) بدون نیاز به نصب؛ تبدیل تله‌متری خام ردیاب‌ها به شاخص‌های وضعیت ناوگان، هشدارهای دسته‌بندی‌شده و گزارش‌های آماده حسابرسی با خروجی Excel.",
     "ph.co.tag": "شرکت", "ph.co.h1": "درباره آتی‌فرزام و فرآیند استقرار", "ph.co.p": "هویت شرکت، مزیت‌های همکاری و نقشهٔ راه استقرار سازمانی.",
     "ph.ct.tag": "دمو، استعلام قیمت و پشتیبانی فنی", "ph.ct.h1": "گفتگو با تیم فروش سازمانی و پشتیبانی فنی آتی‌فرزام",
@@ -1305,6 +1308,8 @@ const SHARED_I18N_ADDITIONS = {
     "hero.m1Val": "9", "hero.m1": "Analytical Reports with Excel Export",
     "hero.m2Val": "3", "hero.m2": "Notification Tiers: Alerts, Maintenance, System",
     "hero.m3Val": "API", "hero.m3": "Two-Way ERP Integration",
+    "console.live": "LIVE", "console.mapLabel": "Tehran · Distribution Fleet", "console.unit": "Unit 104", "console.fenceUnit": "Unit 208", "console.telemetry": "Telemetry", "console.speed": "Speed", "console.fuel": "Fuel", "console.temp": "Cargo Temp", "console.signal": "Signal", "console.acc": "ACC ON", "console.alertTitle": "Geofence Exit", "console.alertSub": "Unit 208 · 2 min ago", "console.coldTitle": "Temp In Range",
+    "tick.1": "Live Fleet Monitoring", "tick.2": "Geofences", "tick.3": "9 Excel Reports", "tick.4": "Temperature & Cold Chain", "tick.5": "ERP API Integration", "tick.6": "Custom Software Development",
     "close.btnHw": "View Hardware", "close.btnDemo": "Request Demo",
     "ctaBand.title": "Ready to equip your fleet or see MyFarzam live?",
     "ctaBand.desc": "Share your vehicle mix and sensor requirements; our team will arrange an online demo and a tailored quotation.",
@@ -1318,6 +1323,7 @@ const SHARED_I18N_ADDITIONS = {
     "ph.hw.tag": "Hardware & Telemetry", "ph.hw.h1": "GPS tracking hardware, selected by the MyFarzam output you need",
     "ph.hw.p": "AtiFarzam supplies a range of vehicle and industrial trackers. Each tracker and auxiliary sensor enables specific data and reports in the MyFarzam platform.",
     "ph.sw.tag": "MyFarzam Software Platform", "ph.sw.h1": "MyFarzam fleet management: live tracking, geofences and 9 analytical reports",
+    "ph.sw.cta2": "Explore the 9 Analytical Reports",
     "ph.sw.p": "A browser-based interface that needs no installation (fully Persian, right-to-left, with English and Arabic on this site): raw tracker telemetry becomes fleet-status indicators, categorised alerts and audit-ready reports with Excel export.",
     "ph.co.tag": "Company", "ph.co.h1": "About AtiFarzam and the deployment process", "ph.co.p": "Company profile, partnership advantages and the enterprise deployment roadmap.",
     "ph.ct.tag": "Demo, quotation and technical support", "ph.ct.h1": "Talk to the AtiFarzam enterprise sales and technical support team",
@@ -1334,6 +1340,8 @@ const SHARED_I18N_ADDITIONS = {
     "hero.m1Val": "٩", "hero.m1": "تقارير تحليلية مع تصدير Excel",
     "hero.m2Val": "٣", "hero.m2": "فئات الإشعارات: تنبيه، صيانة، نظام",
     "hero.m3Val": "API", "hero.m3": "ربط ثنائي الاتجاه مع ERP",
+    "console.live": "مباشر", "console.mapLabel": "طهران · أسطول التوزيع", "console.unit": "الوحدة ١٠٤", "console.fenceUnit": "الوحدة ٢٠٨", "console.telemetry": "القياس عن بُعد", "console.speed": "السرعة", "console.fuel": "الوقود", "console.temp": "حرارة الشحنة", "console.signal": "الإشارة", "console.acc": "التشغيل مفعّل", "console.alertTitle": "خروج من النطاق", "console.alertSub": "الوحدة ٢٠٨ · قبل دقيقتين", "console.coldTitle": "الحرارة ضمن النطاق",
+    "tick.1": "مراقبة الأسطول المباشرة", "tick.2": "النطاقات الجغرافية", "tick.3": "٩ تقارير Excel", "tick.4": "حساس الحرارة وسلسلة التبريد", "tick.5": "ربط API مع ERP", "tick.6": "تطوير برمجيات مخصص",
     "close.btnHw": "استعراض الأجهزة", "close.btnDemo": "طلب عرض توضيحي",
     "ctaBand.title": "هل أنتم مستعدون لتجهيز أسطولكم أو مشاهدة عرض مباشر لنظام MyFarzam؟",
     "ctaBand.desc": "شاركونا تركيبة المركبات والحساسات المطلوبة؛ ليقوم فريقنا بترتيب جلسة عرض مباشر وعرض سعر مخصص.",
@@ -1347,6 +1355,7 @@ const SHARED_I18N_ADDITIONS = {
     "ph.hw.tag": "الأجهزة والقياس عن بُعد", "ph.hw.h1": "أجهزة تتبع GPS: اختيار الجهاز بحسب مخرجات MyFarzam المطلوبة",
     "ph.hw.p": "توفّر آتي فرزام طرازات متنوعة من أجهزة التتبع للمركبات والاستخدام الصناعي، ويفعّل كل جهاز وحساس إضافي بيانات وتقارير محددة في منصة MyFarzam.",
     "ph.sw.tag": "منصة MyFarzam البرمجية", "ph.sw.h1": "نظام MyFarzam لإدارة الأسطول: تتبع مباشر ونطاقات جغرافية و٩ تقارير تحليلية",
+    "ph.sw.cta2": "استعراض التقارير التحليلية التسعة",
     "ph.sw.p": "واجهة تعمل من المتصفح دون حاجة إلى تثبيت (فارسية بالكامل ومن اليمين إلى اليسار، مع العربية والإنجليزية في هذا الموقع)؛ تحوّل بيانات التتبع الخام إلى مؤشرات لحالة الأسطول وتنبيهات مصنّفة وتقارير جاهزة للتدقيق بصيغة Excel.",
     "ph.co.tag": "الشركة", "ph.co.h1": "عن آتي فرزام وعملية التنفيذ", "ph.co.p": "هوية الشركة ومزايا التعاون وخارطة طريق التنفيذ المؤسسي.",
     "ph.ct.tag": "عرض توضيحي وتسعير ودعم فني", "ph.ct.h1": "تحدّث مع فريق المبيعات المؤسسية والدعم الفني في آتي فرزام",
@@ -1354,6 +1363,229 @@ const SHARED_I18N_ADDITIONS = {
   }
 };
 Object.keys(SHARED_I18N_ADDITIONS).forEach(function (l) { Object.assign(I18N[l], SHARED_I18N_ADDITIONS[l]); });
+
+/* =========================================================
+   HOME PAGE — reference design copy (FA / EN / AR)
+   ========================================================= */
+const HOME_I18N = {
+  fa: {
+    "home.hero.main": "ردیابی هوشمند و مدیریت ناوگان",
+    "home.hero.accent": "آتی‌فرزام",
+    "home.hero.desc": "زنجیرهٔ کامل تله‌متری ناوگان سازمانی و خودروهای شخصی؛ از تأمین ردیاب‌های صنعتی و سنسورهای دما، سوخت و سوئیچ (ACC) تا داشبورد زنده، ۹ گزارش تحلیلی با خروجی Excel و توسعهٔ نرم‌افزار اختصاصی متناسب با فرآیندهای سازمان شما.",
+    "home.hero.float1": "پایش زنده",
+    "home.hero.float2": "یکپارچه، از ردیاب تا گزارش",
+    "home.sol.tag": "۰۱ / سه ضلع راهکار یکپارچه",
+    "home.sol.title": "بسته به نیاز سازمان خود، از کجا شروع می‌کنید؟",
+    "home.sol.desc": "سخت‌افزار، نرم‌افزار و توسعه اختصاصی؛ در یک زنجیرهٔ کامل تله‌متری.",
+    "home.sol.hw.t": "کاتالوگ سخت‌افزار و سنسورها",
+    "home.sol.hw.d": "تأمین مدل‌های متنوع ردیاب GPS برای ناوگان سبک، سنگین و زنجیره سرد با ورودی‌های سوئیچ (ACC)، سنسور دما، سنسور سوخت و تله‌متری ولتاژ.",
+    "home.sol.hw.link": "مشاوره انتخاب ردیاب",
+    "home.sol.sw.t": "سامانه نرم‌افزاری MyFarzam",
+    "home.sol.sw.d": "داشبورد مدیریتی، نقشه زنده، گروه‌بندی ناوگان، رسم محدوده‌های مجاز (Geofence)، اعلان‌های سه‌گانه و ۹ گزارش تحلیلی با خروجی Excel.",
+    "home.sol.dev.t": "توسعه اختصاصی و API",
+    "home.sol.dev.d": "توسعهٔ نرم‌افزار اختصاصی متناسب با فرآیندهای سازمان شما و اتصال دوطرفه به ERP سازمان.",
+    "home.sol.dev.link": "گفتگو درباره نیاز سازمان",
+    "home.sw.tag": "۰۲ / پلتفرم نرم‌افزاری MyFarzam",
+    "home.sw.title": "ناوگان خود را با داده‌های دقیق مدیریت کنید",
+    "home.sw.desc": "محیط کاربری کاملاً فارسی و راست‌به‌چپ (RTL) بدون نیاز به نصب؛ تبدیل تله‌متری خام ردیاب‌ها به شاخص‌های وضعیت ناوگان، هشدارهای دسته‌بندی‌شده و گزارش‌های آماده حسابرسی با خروجی Excel.",
+    "home.sw.f1": "نقشهٔ دستگاه‌ها",
+    "home.sw.f2": "محدوده‌های مجاز",
+    "home.sw.f3": "اعلان‌های سه‌گانه",
+    "home.sw.f4": "۹ گزارش تحلیلی",
+    "home.sw.float1": "پایش زنده موقعیت خودرو",
+    "home.sw.float2": "بازسازی مسیر و تاریخچه سفرها",
+    "home.sw.caption": "نمای مفهومی قابلیت‌های سامانه؛ دادهٔ زنده نیست",
+    "home.sw.scroll": "با اسکرول، صفحه‌های سامانه در فضا می‌چرخند؛ از نقشهٔ زنده و داشبورد تا محدوده‌های مجاز و گزارش‌های تحلیلی.",
+    "home.sw.s1.t": "نقشهٔ زنده",
+    "home.sw.s1.d": "موقعیت لحظه‌ای ناوگان روی نقشه با مسیر و پین پویا",
+    "home.sw.s2.t": "داشبورد مدیریتی",
+    "home.sw.s2.d": "شاخص‌های کلیدی، نمودار پیمایش و مقایسهٔ دوره‌ها",
+    "home.sw.s3.t": "محدوده‌های مجاز",
+    "home.sw.s3.d": "رسم ژئوفنس دایره‌ای و چندضلعی با هشدار خروج",
+    "home.sw.s4.t": "گزارش‌های تحلیلی",
+    "home.sw.s4.d": "۹ گزارش با خروجی Excel و اتصال API به سامانه‌ها",
+    "home.sw.k1": "واحد فعال", "home.sw.k2": "سرعت میانگین", "home.sw.k3": "دقت موقعیت",
+    "home.sw.k4": "پیمایش امروز", "home.sw.k5": "نسبت به دورهٔ قبل", "home.sw.k6": "بهره‌وری ناوگان",
+    "home.sw.k7": "محدودهٔ فعال", "home.sw.k8": "هشدار خروج", "home.sw.k9": "تأخیر اعلان",
+    "home.sw.k10": "گزارش تحلیلی", "home.sw.k11": "خروجی آماده", "home.sw.k12": "اتصال ERP",
+    "home.roles.tag": "۰۳ / مسیر مناسب با نقش و مقیاس کاربری شما",
+    "home.roles.title": "شما کدام‌یک هستید؟",
+    "home.roles.desc": "پیکربندی سخت‌افزار و گزارش‌های MyFarzam متناسب با نوع دارایی، الزامات زنجیره سرد، شیفت‌های کاری و محدوده‌های جغرافیایی هر صنعت تنظیم می‌شود.",
+    "home.roles.r1.t": "مدیر ناوگان و تدارکات سازمانی",
+    "home.roles.r1.d": "گزارش‌های مقایسه‌ای، خروجی Excel و اتصال API",
+    "home.roles.r2.t": "مسئول حمل‌ونقل و اپراتور",
+    "home.roles.r2.d": "نقشه زنده، محدوده‌های مجاز و اعلان‌های سرویس دوره‌ای",
+    "home.roles.r3.t": "مالک خودروی شخصی",
+    "home.roles.r3.d": "موقعیت لحظه‌ای روی موبایل و تاریخچه سفرها",
+    "home.industries.label": "صنایع هدف",
+    "home.industries.i1": "پخش و لجستیک",
+    "home.industries.i2": "زنجیره سرد",
+    "home.industries.i3": "ترانزیت و سنگین",
+    "home.industries.i4": "سازمانی و خدماتی",
+    "home.cta.tag": "دمو، استعلام قیمت و پشتیبانی فنی",
+    "home.cta.title": "ناوگان خود را با داده‌های دقیق مدیریت کنید",
+    "home.cta.desc": "برای دریافت دموی زنده سامانه MyFarzam و مشاوره انتخاب مدل ردیاب متناسب با خودروهای سازمانتان با تیم فنی ما گفتگو کنید.",
+    "footer.top": "بازگشت به بالا ↑",
+  },
+  en: {
+    "home.hero.main": "Smart Fleet & GPS Management",
+    "home.hero.accent": "AtiFarzam",
+    "home.hero.desc": "Complete telemetry for enterprise fleets and private vehicles: industrial trackers, temperature, fuel and ACC sensors, a live dashboard, 9 analytical reports with Excel export, and software tailored to your organisation’s processes.",
+    "home.hero.float1": "Live Telemetry",
+    "home.hero.float2": "Connected, from tracker to report",
+    "home.sol.tag": "01 / ONE CONNECTED SOLUTION",
+    "home.sol.title": "Where does your organisation start?",
+    "home.sol.desc": "Hardware, software and custom development, in one complete telemetry chain.",
+    "home.sol.hw.t": "Hardware & sensors",
+    "home.sol.hw.d": "GPS trackers for light and heavy fleets and cold chains, with ACC inputs, temperature and fuel sensors, and voltage telemetry.",
+    "home.sol.hw.link": "Find the right tracker",
+    "home.sol.sw.t": "MyFarzam platform",
+    "home.sol.sw.d": "Management dashboard, live map, fleet grouping, geofences, three notification tiers and 9 analytical reports with Excel export.",
+    "home.sol.dev.t": "Custom development & API",
+    "home.sol.dev.d": "Software tailored to your organisation’s processes and two-way integration with your enterprise ERP.",
+    "home.sol.dev.link": "Discuss your requirements",
+    "home.sw.tag": "02 / MYFARZAM PLATFORM",
+    "home.sw.title": "Manage your fleet with accurate data",
+    "home.sw.desc": "A browser-based Persian RTL interface with no installation: turn raw tracker telemetry into fleet-status indicators, categorised alerts and audit-ready reports with Excel export.",
+    "home.sw.f1": "Devices map",
+    "home.sw.f2": "Geofences",
+    "home.sw.f3": "Three notification tiers",
+    "home.sw.f4": "9 analytical reports",
+    "home.sw.float1": "Live vehicle location",
+    "home.sw.float2": "Route playback & trip history",
+    "home.sw.caption": "Conceptual platform visual — not live data",
+    "home.sw.scroll": "As you scroll, the platform screens rotate through space — from the live map and dashboard to geofences and analytical reports.",
+    "home.sw.s1.t": "Live map",
+    "home.sw.s1.d": "Real-time fleet positions with routes and dynamic pins",
+    "home.sw.s2.t": "Management dashboard",
+    "home.sw.s2.d": "Key indicators, mileage charts and period comparison",
+    "home.sw.s3.t": "Geofences",
+    "home.sw.s3.d": "Draw circular and polygon zones with exit alerts",
+    "home.sw.s4.t": "Analytical reports",
+    "home.sw.s4.d": "9 reports with Excel export and API connection",
+    "home.sw.k1": "Active units", "home.sw.k2": "Avg. speed", "home.sw.k3": "Position accuracy",
+    "home.sw.k4": "Mileage today", "home.sw.k5": "vs. previous period", "home.sw.k6": "Fleet efficiency",
+    "home.sw.k7": "Active zones", "home.sw.k8": "Exit alerts", "home.sw.k9": "Alert delay",
+    "home.sw.k10": "Analytical reports", "home.sw.k11": "Ready export", "home.sw.k12": "ERP link",
+    "home.roles.tag": "03 / BUILT AROUND YOUR ROLE",
+    "home.roles.title": "Which role is yours?",
+    "home.roles.desc": "Hardware and MyFarzam reports are configured for each industry’s assets, cold-chain requirements, work shifts and geographical boundaries.",
+    "home.roles.r1.t": "Fleet & procurement manager",
+    "home.roles.r1.d": "Comparative reports, Excel export & API integration",
+    "home.roles.r2.t": "Transport manager & operator",
+    "home.roles.r2.d": "Live map, geofences & maintenance notifications",
+    "home.roles.r3.t": "Private vehicle owner",
+    "home.roles.r3.d": "Live location on mobile & trip history",
+    "home.industries.label": "INDUSTRIES",
+    "home.industries.i1": "Distribution & logistics",
+    "home.industries.i2": "Cold chain",
+    "home.industries.i3": "Transit & heavy duty",
+    "home.industries.i4": "Enterprise & municipal",
+    "home.cta.tag": "DEMO, QUOTATION & TECHNICAL SUPPORT",
+    "home.cta.title": "Manage your fleet with accurate data",
+    "home.cta.desc": "Talk to our technical team for a live MyFarzam demo and advice on choosing trackers for your organisation’s vehicles.",
+    "footer.top": "Back to top ↑",
+  },
+  ar: {
+    "home.hero.main": "إدارة الأسطول والتتبع الذكي",
+    "home.hero.accent": "آتي فرزام",
+    "home.hero.desc": "سلسلة متكاملة لتتبع الأساطيل المؤسسية والمركبات الشخصية؛ من أجهزة التتبع الصناعية وحساسات الحرارة والوقود وACC إلى لوحة مباشرة و٩ تقارير تحليلية بصيغة Excel وبرمجيات مخصصة لعمليات مؤسستكم.",
+    "home.hero.float1": "التتبع المباشر",
+    "home.hero.float2": "متكامل، من التتبع إلى التقرير",
+    "home.sol.tag": "٠١ / ثلاثة أضلاع لحل متكامل",
+    "home.sol.title": "من أين تبدأ حسب احتياجات مؤسستك؟",
+    "home.sol.desc": "الأجهزة والبرمجيات والتطوير المخصص في سلسلة متكاملة للتتبع.",
+    "home.sol.hw.t": "كتالوج الأجهزة والحساسات",
+    "home.sol.hw.d": "أجهزة GPS للأساطيل الخفيفة والثقيلة وسلاسل التبريد، بمدخلات ACC وحساسات الحرارة والوقود وقياس الجهد.",
+    "home.sol.hw.link": "استشارة لاختيار الجهاز",
+    "home.sol.sw.t": "منصة MyFarzam البرمجية",
+    "home.sol.sw.d": "لوحة إدارة وخريطة مباشرة وتجميع الأسطول ونطاقات جغرافية وثلاث فئات إشعارات و٩ تقارير تحليلية مع تصدير Excel.",
+    "home.sol.dev.t": "التطوير المخصص وAPI",
+    "home.sol.dev.d": "تطوير برمجيات مخصصة لعمليات مؤسستكم وربط ثنائي الاتجاه مع نظام ERP.",
+    "home.sol.dev.link": "ناقش احتياجات مؤسستك",
+    "home.sw.tag": "٠٢ / منصة MyFarzam البرمجية",
+    "home.sw.title": "أدر أسطولك ببيانات دقيقة",
+    "home.sw.desc": "واجهة فارسية من اليمين إلى اليسار دون تثبيت؛ تحوّل بيانات التتبع الخام إلى مؤشرات لحالة الأسطول وتنبيهات مصنّفة وتقارير جاهزة للتدقيق بصيغة Excel.",
+    "home.sw.f1": "خريطة الأجهزة",
+    "home.sw.f2": "النطاقات الجغرافية",
+    "home.sw.f3": "ثلاث فئات إشعارات",
+    "home.sw.f4": "٩ تقارير تحليلية",
+    "home.sw.float1": "موقع المركبة المباشر",
+    "home.sw.float2": "إعادة عرض المسار وسجل الرحلات",
+    "home.sw.caption": "تصوّر لمزايا المنصة — ليست بيانات مباشرة",
+    "home.sw.scroll": "مع التمرير تدور شاشات المنصة في الفضاء؛ من الخريطة المباشرة ولوحة التحكم إلى النطاقات الجغرافية والتقارير التحليلية.",
+    "home.sw.s1.t": "الخريطة المباشرة",
+    "home.sw.s1.d": "مواقع الأسطول اللحظية على الخريطة مع المسار والدبوس الديناميكي",
+    "home.sw.s2.t": "لوحة الإدارة",
+    "home.sw.s2.d": "المؤشرات الرئيسية ومخطط المسافات ومقارنة الفترات",
+    "home.sw.s3.t": "النطاقات الجغرافية",
+    "home.sw.s3.d": "رسم نطاقات دائرية ومتعددة الأضلاع مع تنبيه الخروج",
+    "home.sw.s4.t": "التقارير التحليلية",
+    "home.sw.s4.d": "٩ تقارير مع تصدير Excel وربط عبر API",
+    "home.sw.k1": "وحدات نشطة", "home.sw.k2": "متوسط السرعة", "home.sw.k3": "دقة الموقع",
+    "home.sw.k4": "مسافة اليوم", "home.sw.k5": "مقابل الفترة السابقة", "home.sw.k6": "كفاءة الأسطول",
+    "home.sw.k7": "نطاق نشط", "home.sw.k8": "تنبيه خروج", "home.sw.k9": "تأخير التنبيه",
+    "home.sw.k10": "تقرير تحليلي", "home.sw.k11": "تصدير جاهز", "home.sw.k12": "ربط ERP",
+    "home.roles.tag": "٠٣ / المسار المناسب لدورك وحجم استخدامك",
+    "home.roles.title": "ما هو دورك؟",
+    "home.roles.desc": "تُضبط الأجهزة وتقارير MyFarzam وفق أصول كل قطاع ومتطلبات سلسلة التبريد وورديات العمل والحدود الجغرافية.",
+    "home.roles.r1.t": "مدير الأسطول والمشتريات",
+    "home.roles.r1.d": "تقارير مقارنة وتصدير Excel وربط API",
+    "home.roles.r2.t": "مسؤول النقل والمشغّل",
+    "home.roles.r2.d": "خريطة مباشرة ونطاقات جغرافية وإشعارات الصيانة",
+    "home.roles.r3.t": "مالك مركبة شخصية",
+    "home.roles.r3.d": "الموقع المباشر على الجوال وسجل الرحلات",
+    "home.industries.label": "القطاعات المستهدفة",
+    "home.industries.i1": "التوزيع والخدمات اللوجستية",
+    "home.industries.i2": "سلسلة التبريد",
+    "home.industries.i3": "النقل والمركبات الثقيلة",
+    "home.industries.i4": "المؤسسات والخدمات البلدية",
+    "home.cta.tag": "عرض توضيحي وتسعير ودعم فني",
+    "home.cta.title": "أدر أسطولك ببيانات دقيقة",
+    "home.cta.desc": "تواصل مع فريقنا الفني للحصول على عرض مباشر لمنصة MyFarzam واستشارة لاختيار أجهزة التتبع المناسبة لمركبات مؤسستكم.",
+    "footer.top": "العودة إلى الأعلى ↑",
+  },
+};
+Object.keys(HOME_I18N).forEach(function (l) { Object.assign(I18N[l], HOME_I18N[l]); });
+
+/* One shared language entry point for the reference-style <select> header. */
+function afApplyLanguage(lang, opts) {
+  opts = opts || {};
+  const meta = LANG_META[lang];
+  const dict = I18N[lang];
+  if (!meta || !dict) return;
+
+  currentLang = lang;
+
+  document.documentElement.setAttribute("lang", lang);
+  document.documentElement.setAttribute("dir", meta.dir);
+  if (document.body) {
+    document.body.setAttribute("lang", lang);
+    document.body.setAttribute("dir", meta.dir);
+  }
+
+  const page = document.documentElement.getAttribute("data-page") || "index";
+  document.title = dict["title." + page] || meta.docTitle;
+
+  const nodes = document.querySelectorAll("[data-i18n]");
+  for (let i = 0; i < nodes.length; i++) {
+    const key = nodes[i].getAttribute("data-i18n");
+    if (key && dict[key] !== undefined) nodes[i].textContent = dict[key];
+  }
+
+  if (typeof refreshTelemetryLanguage === "function") {
+    try { refreshTelemetryLanguage(); } catch (_) {}
+  }
+
+  const select = document.getElementById("language");
+  if (select) select.value = lang;
+
+  if (opts.persist !== false) {
+    try { window.localStorage.setItem("af_lang", lang); } catch (_) {}
+  }
+}
+window.AF_APPLY_LANGUAGE = afApplyLanguage;
+
 
 
 function setupTelemetryBoard() {

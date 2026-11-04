@@ -2227,9 +2227,6 @@ body.is-lang-fading .pres-footer {
   pointer-events: none;
 }
 
-  pointer-events: none;
-}
-
 /* Support Modal */
 .support-button-wrap {
   display: flex;

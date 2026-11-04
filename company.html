@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#8A95A0" />
+    <meta name="theme-color" content="#DCE1E8" />
     <meta name="description" content="ارائه تعاملی سامانه مدیریت ناوگان آتی فرزام — موقعیت‌یابی لحظه‌ای خودرو، پایش مسیرهای حرکتی و فواید ردیاب هوشمند GPS" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fa_IR" />
@@ -15,133 +15,70 @@
     <link rel="preload" href="./assets/fonts/Peyda-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./src/presentation.css" />
 <link rel="stylesheet" href="./src/pages.css" />
+<link rel="stylesheet" href="./src/atelier.css" />
     <style id="af-motion-styles"></style>
   </head>
   <body>
-    <!-- Page Top Gradient -->
-    <div class="page-top-gradient" aria-hidden="true"></div>
-    
-    <!-- Kinetic Interactive Micro-Dot Field + Architectural Background Rings -->
-    <div class="bg-kinetic-stage" aria-hidden="true">
-      <canvas class="bg-dots-canvas" id="bg-dots-canvas"></canvas>
-      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" class="bg-kinetic-svg">
-        <g id="bg-wheel-left" transform="translate(190, 210)">
-          <circle cx="0" cy="0" r="310" fill="none" stroke="#102333" stroke-opacity="0.045" stroke-width="1.2" stroke-dasharray="10 14" />
-          <circle cx="0" cy="0" r="230" fill="none" stroke="#f05327" stroke-opacity="0.065" stroke-width="1.3" stroke-dasharray="48 28" />
-        </g>
-        <g id="bg-wheel-right" transform="translate(1260, 700)">
-          <circle cx="0" cy="0" r="360" fill="none" stroke="#102333" stroke-opacity="0.04" stroke-width="1.3" stroke-dasharray="22 16" />
-          <circle cx="0" cy="0" r="260" fill="none" stroke="#f05327" stroke-opacity="0.06" stroke-width="1.6" stroke-dasharray="80 40" />
-        </g>
-      </svg>
-    </div>
+<div class="af-progress" id="af-progress" aria-hidden="true"></div>
 
-    <!-- Top Orange Scroll Progress Beam -->
-    <div class="scroll-line" id="scroll-line" aria-hidden="true"></div>
-
-    <!-- ===================================================================
-         MINIMALIST ORANGE-GLASS SCROLL LINE + BORDERLESS FROSTED TRAVELER
-         =================================================================== -->
-    <aside class="scroll-rail" id="scroll-journey" aria-hidden="true">
-      <div class="scroll-rail-track">
-        <!-- Translucent Orange Glass Progress Fill -->
-        <div class="scroll-rail-fill" id="scroll-rail-fill"></div>
-      </div>
-
-      <!-- Contour-Trace (ترسیم خطی) Emblem inside 30% Borderless Frosted-Glass Circle -->
-      <div class="scroll-trace-traveler" id="scroll-trace-traveler">
-        <svg viewBox="-900 -900 1800 1800" class="scroll-trace-svg" id="scroll-trace-svg"></svg>
-      </div>
-    </aside>
-
-    <!-- Minimal Floating Presentation Header -->
-    <header class="top-bar" id="top-bar">
-      <div class="container top-bar-inner">
-        <a href="index.html" class="brand-cluster smooth-lift" aria-label="سامانه مدیریت ناوگان آتی‌فرزام">
-          <img src="./assets/images/af-logo.svg" alt="" class="nav-af-mark" width="30" height="30" />
-          <div class="nav-divider"></div>
-          <img src="./assets/images/typography-fa.svg" alt="آتی‌فرزام" class="nav-fa-type" width="66" height="22" />
-          <img src="./assets/images/typography-en.svg" alt="AtiFarzam" class="nav-en-type" width="96" height="20" />
+    <header class="af-header" id="af-header">
+      <div class="af-header-in">
+        <a href="index.html" class="af-brand" aria-label="آتی‌فرزام — خانه">
+          <img class="af-brand-mark" src="./assets/images/af-logo.svg" alt="" width="41" height="41" />
+          <span class="af-brand-type">
+            <img src="./assets/images/typography-fa.svg" alt="آتی‌فرزام" width="77" height="25" />
+            <img src="./assets/images/typography-en.svg" alt="AtiFarzam" width="77" height="13" />
+          </span>
         </a>
 
-        <nav class="top-nav" aria-label="صفحه‌های سایت"><button type="button" class="nav-hamburger" id="nav-hamburger" aria-label="منوی ناوبری" aria-expanded="false" aria-controls="nav-mobile-menu"><span></span><span></span><span></span></button><div class="nav-mobile-overlay" id="nav-mobile-overlay"></div><div class="nav-mobile-menu" id="nav-mobile-menu"><div class="nav-item"><a href="index.html" class="smooth-lift" data-i18n="nav.home">خانه</a></div><div class="nav-item"><a href="hardware.html" class="smooth-lift" data-i18n="nav.hardware">سخت‌افزار</a></div><div class="nav-item" data-dropdown="software"><a href="software.html" class="smooth-lift"><span data-i18n="nav.software">نرم‌افزار</span> <span class="nav-dropdown-toggle" role="button" aria-label="زیرمنو"></span></a><div class="nav-dropdown"><a href="software.html#ch-telemetry" class="smooth-lift" data-i18n="nav.sw.telemetry">پایش زنده</a><a href="software.html#ch-dashboard" class="smooth-lift" data-i18n="nav.sw.dashboard">داشبورد</a><a href="software.html#ch-map" class="smooth-lift" data-i18n="nav.sw.map">نقشهٔ دستگاه‌ها</a><a href="software.html#ch-devices" class="smooth-lift" data-i18n="nav.sw.devices">مدیریت دستگاه‌ها</a><a href="software.html#ch-geofences" class="smooth-lift" data-i18n="nav.sw.geofences">محدوده‌ها</a><a href="software.html#ch-notifications" class="smooth-lift" data-i18n="nav.sw.notifications">اعلان‌ها</a><a href="software.html#ch-reports" class="smooth-lift" data-i18n="nav.sw.reports">گزارش‌ها</a><a href="software.html#ch-custom-dev" class="smooth-lift" data-i18n="nav.sw.custom">توسعه اختصاصی</a></div></div><div class="nav-item"><a href="company.html" class="smooth-lift is-current" data-i18n="nav.company">شرکت</a></div><div class="nav-item"><a href="contact.html" class="smooth-lift" data-i18n="nav.contact">تماس</a></div><div class="nav-item"><a href="contact.html" class="nav-cta smooth-lift" data-i18n="nav.cta">درخواست دمو</a></div></div><div class="nav-desktop"><div class="nav-item"><a href="index.html" class="smooth-lift" data-i18n="nav.home">خانه</a></div><div class="nav-item"><a href="hardware.html" class="smooth-lift" data-i18n="nav.hardware">سخت‌افزار</a></div><div class="nav-item" data-dropdown="software"><a href="software.html" class="smooth-lift"><span data-i18n="nav.software">نرم‌افزار</span> <span class="nav-dropdown-toggle" role="button" aria-label="زیرمنو"></span></a><div class="nav-dropdown"><a href="software.html#ch-telemetry" class="smooth-lift" data-i18n="nav.sw.telemetry">پایش زنده</a><a href="software.html#ch-dashboard" class="smooth-lift" data-i18n="nav.sw.dashboard">داشبورد</a><a href="software.html#ch-map" class="smooth-lift" data-i18n="nav.sw.map">نقشهٔ دستگاه‌ها</a><a href="software.html#ch-devices" class="smooth-lift" data-i18n="nav.sw.devices">مدیریت دستگاه‌ها</a><a href="software.html#ch-geofences" class="smooth-lift" data-i18n="nav.sw.geofences">محدوده‌ها</a><a href="software.html#ch-notifications" class="smooth-lift" data-i18n="nav.sw.notifications">اعلان‌ها</a><a href="software.html#ch-reports" class="smooth-lift" data-i18n="nav.sw.reports">گزارش‌ها</a><a href="software.html#ch-custom-dev" class="smooth-lift" data-i18n="nav.sw.custom">توسعه اختصاصی</a></div></div><div class="nav-item"><a href="company.html" class="smooth-lift is-current" data-i18n="nav.company">شرکت</a></div><div class="nav-item"><a href="contact.html" class="smooth-lift" data-i18n="nav.contact">تماس</a></div><div class="nav-item"><a href="contact.html" class="nav-cta smooth-lift" data-i18n="nav.cta">درخواست دمو</a></div></div></nav>
+        <nav class="af-nav" aria-label="ناوبری اصلی">
+          <a href="index.html" class="" data-i18n="nav.home">خانه</a>
+          <a href="hardware.html" class="" data-i18n="nav.hardware">سخت‌افزار</a>
+          <a href="software.html" class="" data-i18n="nav.software">نرم‌افزار</a>
+          <a href="company.html" class="is-active" data-i18n="nav.company">شرکت</a>
+          <a href="contact.html" class="" data-i18n="nav.contact">تماس</a>
+        </nav>
 
-        <!-- Top-Left Sliding Language Drawer Switcher (FA / EN / AR) -->
-        <div class="lang-switcher" id="lang-switcher" style="--lang-idx: 0">
-          <button
-            type="button"
-            class="lang-trigger"
-            id="lang-trigger"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-controls="lang-drawer-tray"
-            aria-label="تغییر زبان سایت — Change Language"
-          >
-            <span class="lang-trigger-label" id="lang-current-name">فارسی</span>
-            <span class="lang-trigger-code" id="lang-current-code" dir="ltr">FA</span>
-            <svg viewBox="0 0 16 16" class="lang-chevron-svg" aria-hidden="true" fill="none">
-              <path d="M4.2 6.2L8 10L11.8 6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+        <div class="af-head-actions">
+          <select id="language" class="af-lang" aria-label="Language / زبان">
+            <option value="fa">فارسی</option>
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+          </select>
+          <a href="contact.html" class="af-cta af-cta-dark">
+            <span data-i18n="nav.cta">درخواست دمو</span>
+            <svg class="af-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+          </a>
+          <button type="button" class="af-menu-btn" id="af-menu-btn" aria-expanded="false" aria-controls="af-mobile" aria-label="منو / Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
           </button>
-
-          <!-- Sliding Frosted-Glass Drawer Tray -->
-          <div class="lang-drawer-tray" id="lang-drawer-tray" role="listbox" aria-label="انتخاب زبان">
-            <div class="lang-drawer-inner">
-              <div class="lang-drawer-head" aria-hidden="true">
-                <span class="lang-drawer-grip"></span>
-                <span class="lang-drawer-caption" data-i18n="lang.caption">انتخاب زبان نمایش</span>
-              </div>
-
-              <div class="lang-options-track">
-                <div class="lang-active-glider" aria-hidden="true"></div>
-
-                <button type="button" class="lang-opt-btn is-active" role="option" aria-selected="true" data-lang="fa" data-idx="0">
-                  <span class="lang-opt-crest" aria-hidden="true">
-                    <span class="crest-glyph">ف</span>
-                  </span>
-                  <span class="lang-opt-copy">
-                    <strong>فارسی</strong>
-                    <small dir="ltr">FA · Persian</small>
-                  </span>
-                  <span class="lang-opt-dot" aria-hidden="true"></span>
-                </button>
-
-                <button type="button" class="lang-opt-btn" role="option" aria-selected="false" data-lang="en" data-idx="1">
-                  <span class="lang-opt-crest" aria-hidden="true">
-                    <span class="crest-glyph" dir="ltr">EN</span>
-                  </span>
-                  <span class="lang-opt-copy">
-                    <strong dir="ltr">English</strong>
-                    <small>انگلیسی · International</small>
-                  </span>
-                  <span class="lang-opt-dot" aria-hidden="true"></span>
-                </button>
-
-                <button type="button" class="lang-opt-btn" role="option" aria-selected="false" data-lang="ar" data-idx="2">
-                  <span class="lang-opt-crest" aria-hidden="true">
-                    <span class="crest-glyph">ع</span>
-                  </span>
-                  <span class="lang-opt-copy">
-                    <strong>العربية</strong>
-                    <small dir="ltr">AR · عربی</small>
-                  </span>
-                  <span class="lang-opt-dot" aria-hidden="true"></span>
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
+
+      <nav class="af-mobile" id="af-mobile" aria-label="منوی موبایل">
+        <a href="index.html" data-i18n="nav.home">خانه</a>
+        <a href="hardware.html" data-i18n="nav.hardware">سخت‌افزار</a>
+        <a href="software.html" data-i18n="nav.software">نرم‌افزار</a>
+        <a href="company.html" data-i18n="nav.company">شرکت</a>
+        <a href="contact.html" data-i18n="nav.contact">تماس</a>
+      </nav>
     </header>
 <main class="pres-main">
-<section class="chapter page-hero" id="ch-page-hero"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span data-i18n="ph.co.tag">شرکت</span></div><h1 data-i18n="ph.co.h1">درباره آتی‌فرزام و فرآیند استقرار</h1><p data-i18n="ph.co.p">هویت شرکت، مزیت‌های همکاری و نقشهٔ راه استقرار سازمانی.</p></div></div></section>
+<section class="chapter page-hero" id="ch-page-hero"><div class="container"><div class="page-hero-visual" aria-hidden="true"><div class="ph-orbit"></div><div class="ph-orbit second"></div><img src="./assets/images/isometric.svg" alt="" /></div><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span data-i18n="ph.co.tag">شرکت</span></div><h1 data-i18n="ph.co.h1">درباره آتی‌فرزام و فرآیند استقرار</h1><p data-i18n="ph.co.p">هویت شرکت، مزیت‌های همکاری و نقشهٔ راه استقرار سازمانی.</p><div class="page-hero-actions"><a href="contact.html" class="btn-orange smooth-lift" data-i18n="hero.ctaPrimary">درخواست دمو و استعلام قیمت</a><a href="hardware.html" class="btn-hero-ghost smooth-lift" data-i18n="close.btnHw">مشاهدهٔ سخت‌افزار</a></div></div></div></section>
 <section class="chapter section-space" id="ch-identity"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span>هویت شرکت و فرآیند همکاری B2B</span></div><h2>آتی‌فرزام؛ تجمیع مهندسی نرم‌افزار بومی و تأمین تخصصی سخت‌افزار تله‌متری</h2><p>در بازار ردیاب‌های خودرویی، بسیاری از عرضه‌کنندگان صرفاً فروشنده سخت‌افزار یا ارائه‌دهنده پنل‌های ترجمه‌شده خارجی هستند. مزیت بنیادین آتی‌فرزام برای سازمان‌ها، <b>تأمین مستقیم سخت‌افزارهای تست‌شده</b> در کنار <b>مالکیت کامل کد منبع و توسعه بومی سامانه MyFarzam</b> است؛ به این معنا که سازمان شما برای سخت‌افزار، نرم‌افزار، پشتیبانی و سفارشی‌سازی تنها با یک شریک فنی طرف است.</p></div><div class="rgrid"><article class="rcard reveal"><span class="rn" dir="ltr">01 / HARDWARE SUPPLY</span><h3>تأمین چندمدلی و مهندسی سنسور</h3><p>به‌جای تحمیل یک مدل ردیاب به تمام خودروها، سبد سخت‌افزاری ما بر اساس نوع خودرو (سواری، ون توزیع، کامیون یخچالی، کشنده سنگین) و ورودی‌های مورد نیاز (ACC، دما، سوخت، ولتاژ) چیده می‌شود.</p></article><article class="rcard reveal"><span class="rn" dir="ltr">02 / IN-HOUSE PLATFORM</span><h3>توسعه بومی سامانه MyFarzam</h3><p>طراحی بومی با رابط کاربری استاندارد فارسی (RTL)، تقویم شمسی، فیلترهای کاربردی مثل پاکسازی اختلال و پرش GPS در گزارش پیمایش و گزارش‌های مقایسه‌ای چنددستگاهی با خروجی Excel.</p></article><article class="rcard reveal"><span class="rn" dir="ltr">03 / CUSTOM R&amp;D TEAM</span><h3>تیم تحقیق و توسعه برای نیازهای خاص</h3><p>توانایی توسعه ماژول‌های اختصاصی، اتصال نرم‌افزار ردیابی به اتوماسیون و ERP سازمان و پیاده‌سازی پروتکل ردیاب‌های قبلی مشتری توسط تیم مهندسی داخلی شرکت.</p></article></div></div></section><section class="chapter section-space" id="ch-process"><div class="container"><div class="section-head reveal"><div class="chapter-tag"><span class="tag-beacon"></span><span>نقشه راه استقرار سازمانی</span></div><h2>فرآیند ۴ مرحله‌ای تجهیز و راه‌اندازی ناوگان در آتی‌فرزام</h2><p>مسیر استاندارد همکاری با تیم‌های تدارکات، فناوری اطلاعات و مدیریت ناوگان سازمان‌ها:</p></div><div class="rgrid g4"><article class="rcard reveal"><span class="rn">01</span><h3>نیازسنجی و انتخاب سخت‌افزار</h3><p>بررسی ترکیب خودروهای سازمان و تعیین اینکه کدام واحدها به ردیاب پایه، ورودی سوئیچ (ACC)، سنسور دما (زنجیره سرد) یا پایش سوخت نیاز دارند.</p></article><article class="rcard reveal"><span class="rn">02</span><h3>نصب، ثبت IMEI و سیم‌کارت</h3><p>نصب ایمن سخت‌افزار روی خودروها و ثبت مخزن ردیاب‌ها در حساب MyFarzam با شناسه IMEI، شماره سیم‌کارت، پلاک خودرو و تنظیم منطقه زمانی.</p></article><article class="rcard reveal"><span class="rn">03</span><h3>تعریف گروه‌ها، محدوده‌ها و آموزش</h3><p>ساختاردهی ناوگان در گروه‌های عملیاتی، ترسیم محدوده‌های جغرافیایی (Geofences) و سقف سرعت روی نقشه، و آموزش اپراتورها برای گزارش‌گیری اکسل.</p></article><article class="rcard reveal"><span class="rn">04</span><h3>پشتیبانی، پایش سلامت و API</h3><p>رصد خودکار اعلان‌های سیستمی (عدم دریافت داده یا سررسید اشتراک)، پشتیبانی فنی تلفنی/پیام‌رسان و توسعه وب‌سرویس‌های اختصاصی سازمان.</p></article></div></div></section>
-<div class="page-bottom-gradient" aria-hidden="true"></div>
+
 </main>
-<section class="cta-band"><div class="container cta-band-in"><div><h2 data-i18n="ctaBand.title">آمادهٔ تجهیز ناوگان یا مشاهدهٔ دموی زندهٔ MyFarzam هستید؟</h2><p data-i18n="ctaBand.desc">ترکیب خودروها و سنسورهای موردنیازتان را بگویید تا جلسهٔ دموی آنلاین و پیش‌فاکتور اختصاصی را برایتان آماده کنیم.</p></div><a class="btn-orange smooth-lift" href="contact.html" data-i18n="ctaBand.btn">هماهنگی دموی آنلاین و استعلام قیمت</a></div></section><footer class="pres-footer"><div class="container pres-footer-inner"><nav class="foot-links" aria-label="پیوندهای پایین صفحه"><a href="index.html" data-i18n="nav.home">خانه</a><a href="hardware.html" data-i18n="nav.hardware">سخت‌افزار</a><a href="software.html" data-i18n="nav.software">نرم‌افزار</a><a href="company.html" data-i18n="nav.company">شرکت</a><a href="contact.html" data-i18n="nav.contact">تماس</a></nav><span data-i18n="footer.copy">سامانه مدیریت ناوگان آتی‌فرزام (GPS و ردیاب خودرو)</span><span dir="ltr">AtiFarzam Fleet Management System</span></div></footer><a class="sticky-cta" href="contact.html" data-i18n="sticky.cta">درخواست دمو و استعلام قیمت</a>
+<section class="cta-band"><div class="container cta-band-in"><div><h2 data-i18n="ctaBand.title">آمادهٔ تجهیز ناوگان یا مشاهدهٔ دموی زندهٔ MyFarzam هستید؟</h2><p data-i18n="ctaBand.desc">ترکیب خودروها و سنسورهای موردنیازتان را بگویید تا جلسهٔ دموی آنلاین و پیش‌فاکتور اختصاصی را برایتان آماده کنیم.</p></div><a class="btn-orange smooth-lift" href="contact.html" data-i18n="ctaBand.btn">هماهنگی دموی آنلاین و استعلام قیمت</a></div></section><footer class="af-footer">
+      <div class="af-footer-in">
+        <span data-i18n="footer.copy">سامانه مدیریت ناوگان آتی‌فرزام (GPS و ردیاب خودرو)</span>
+        <span dir="ltr">AtiFarzam Fleet Management System</span>
+        <a href="#" class="af-to-top" data-i18n="footer.top">بازگشت به بالا ↑</a>
+      </div>
+    </footer>
 <script defer src="./src/motions.js"></script>
 <script defer src="./src/presentation.js"></script>
 <script defer src="./src/products.js"></script>
 <script defer src="./src/pages.js"></script>
+<script defer src="./src/atelier.js"></script>
 </body>
 </html>
